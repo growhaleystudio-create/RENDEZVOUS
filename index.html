@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RENDEZVOUS BARBERSHOP — Barbershop Mewah & Spesialis Gaya Rambut Modern di Toronto</title>
+  <meta name="description" content="Ambiens mewah yang konsisten, standar sterilisasi alat medis, dan master barber di 5 cabang Toronto. Sediakan waktu untuk diri Anda.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+  <!-- Custom Magnetic Cursor Elements -->
+  <div class="custom-cursor">
+    <span class="custom-cursor-text"></span>
+  </div>
+  <div class="custom-cursor-follower"></div>
+
+  <!-- 3D Scissors WebGL Canvas Layer (Three.js Scroll Animation) -->
+  <div id="threeScissorsCanvas" class="three-scissors-canvas" aria-hidden="true"></div>
+
+  <!-- Header / Navigation Bar (Clean Minimalist Luxury) -->
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <div class="nav-wrapper">
+        <!-- Brand Logo with Authentic Rendezvous Scissors Emblem -->
+        <a href="#hero" class="brand-logo" data-cursor="RDV">
+          <svg class="rdv-scissors-icon" viewBox="0 0 160 85" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Logo Rendezvous Barbershop">
+            <!-- Stylized "RENDEZ" block letters -->
+            <text x="80" y="24" text-anchor="middle" font-family="'Cinzel', 'Space Grotesk', serif" font-weight="900" font-size="24" letter-spacing="3" fill="currentColor">RENDEZ</text>
+            <!-- Crossed Barber Shears Blades -->
+            <path d="M42 34 L118 64 M118 34 L42 64" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <!-- Scissor Finger Loops -->
+            <circle cx="36" cy="68" r="8" stroke="currentColor" stroke-width="3" fill="none"/>
+            <circle cx="124" cy="68" r="8" stroke="currentColor" stroke-width="3" fill="none"/>
+            <!-- Scripted "Vous" across handles -->
+            <text x="80" y="66" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-style="italic" font-weight="700" font-size="18" fill="currentColor">Vous</text>
+          </svg>
+          <div>
+            <div class="brand-title">RENDEZVOUS<span class="orange-dot"></span></div>
+            <span class="brand-sub">BARBERS • TORONTO</span>
+          </div>
+        </a>
+
+        <!-- Header Actions -->
+        <div class="header-actions">
+          <button class="btn-primary btn-magnetic open-booking-modal" data-cursor="PESAN">
+            <span>RESERVASI</span>
+          </button>
+
+          <!-- Minimalist Editorial Burger Menu Button (Pure 2-Lines Icon - Prominent & Sleek) -->
+          <button class="burger-menu-btn" id="burgerMenuBtn" aria-label="Buka Menu Navigasi" data-cursor="MENU">
+            <div class="burger-icon-lines">
+              <span class="b-line b-line-1"></span>
+              <span class="b-line b-line-2"></span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Fullscreen Luxury Editorial Navigation Overlay (Streamlined 1-Screen Fit) -->
+  <div class="fullscreen-menu-overlay" id="fullscreenMenu" role="dialog" aria-modal="true">
+    
+    <!-- Top Header inside Fullscreen Overlay -->
+    <div class="fs-menu-header">
+      <div class="container fs-header-container">
+        <a href="#hero" class="brand-logo fs-close-trigger" data-cursor="BERANDA">
+          <svg class="rdv-scissors-icon" viewBox="0 0 160 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="80" y="24" text-anchor="middle" font-family="'Cinzel', 'Space Grotesk', serif" font-weight="900" font-size="24" letter-spacing="3" fill="#FFFFFF">RENDEZ</text>
+            <path d="M42 34 L118 64 M118 34 L42 64" stroke="#FF5E1E" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="36" cy="68" r="8" stroke="#FF5E1E" stroke-width="3" fill="none"/>
+            <circle cx="124" cy="68" r="8" stroke="#FF5E1E" stroke-width="3" fill="none"/>
+            <text x="80" y="66" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-style="italic" font-weight="700" font-size="18" fill="#FFFFFF">Vous</text>
+          </svg>
+          <div>
+            <div class="brand-title" style="color: #fff;">RENDEZVOUS<span class="orange-dot"></span></div>
+            <span class="brand-sub">BARBERS • TORONTO</span>
+          </div>
+        </a>
+
+        <div style="display: flex; align-items: center; gap: 1.25rem;">
+          <button class="btn-primary open-booking-modal fs-close-trigger" data-cursor="PESAN">
+            <span>RESERVASI</span>
+          </button>
+
+          <button class="fs-menu-close-btn" id="fsMenuCloseBtn" aria-label="Tutup Menu">
+            <span>TUTUP ✕</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Fullscreen Menu Body Grid -->
+    <div class="container fs-menu-container">
+      <div class="fs-menu-grid">
+        
+        <!-- Left: Streamlined Editorial Navigation Links -->
+        <nav class="fs-nav-links-stack">
+          <a href="#hero" class="fs-nav-link fs-close-trigger" data-cursor="BERANDA">
+            <span class="fs-nav-num">01</span>
+            <span class="fs-nav-title">BERANDA</span>
+          </a>
+
+          <a href="#philosophy" class="fs-nav-link fs-close-trigger" data-cursor="FILOSOFI">
+            <span class="fs-nav-num">02</span>
+            <span class="fs-nav-title">FILOSOFI KAMI</span>
+          </a>
+
+          <a href="#services" class="fs-nav-link fs-close-trigger" data-cursor="LAYANAN">
+            <span class="fs-nav-num">03</span>
+            <span class="fs-nav-title">LAYANAN & HARGA</span>
+          </a>
+
+          <a href="#locations" class="fs-nav-link fs-close-trigger" data-cursor="CABANG">
+            <span class="fs-nav-num">04</span>
+            <span class="fs-nav-title">5 CABANG TORONTO</span>
+          </a>
+
+          <a href="#team" class="fs-nav-link fs-close-trigger" data-cursor="TIM">
+            <span class="fs-nav-num">05</span>
+            <span class="fs-nav-title">TIM MASTER BARBER</span>
+          </a>
+
+          <a href="#giftcards" class="fs-nav-link fs-close-trigger" data-cursor="VOUCHER">
+            <span class="fs-nav-num">06</span>
+            <span class="fs-nav-title">VOUCHER HADIAH</span>
+          </a>
+
+          <a href="#faq" class="fs-nav-link fs-close-trigger" data-cursor="FAQ">
+            <span class="fs-nav-num">07</span>
+            <span class="fs-nav-title">TANYA JAWAB</span>
+          </a>
+        </nav>
+
+        <!-- Right: Compact Booking Card -->
+        <div class="fs-hub-sidebar">
+          <div class="fs-hub-card">
+            <div class="fs-hub-card-label">RESERVASI EKSKLUSIF</div>
+            <p style="font-size: 0.85rem; color: var(--text-cream); margin-bottom: 0.75rem; line-height: 1.5;">
+              5 Lokasi di Toronto: Queen St W, Scarborough, Yonge St, King St W, Mutual St.
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.15rem;">
+              SMS/WhatsApp: <a href="tel:+14165962383" style="color: var(--orange-primary); font-weight: 700;">+1 416-596-2383</a>
+            </p>
+            <button class="btn-primary open-booking-modal fs-close-trigger" style="width: 100%;">
+              PESAN JADWAL SEKARANG
+            </button>
+          </div>
+
+          <div class="fs-hub-footer">
+            <div style="display: flex; gap: 0.65rem;">
+              <a href="https://www.instagram.com/rendezvous.barbershops/" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://www.facebook.com/RendezVous.ca" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-subtle);">
+              © 2026 RENDEZVOUS
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==========================================================================
+       MAIN CURTAIN WRAPPER (SLIDES UP ON SCROLL TO REVEAL FOOTER)
+       ========================================================================== -->
+  <main class="main-curtain-wrapper" id="mainCurtainWrap">
+
+    <!-- Signature Bold Orange Hero Section (Authentic Rendezvous Toronto) -->
+    <section class="hero-orange-section" id="hero">
+      <div class="hero-orange-container">
+        
+        <!-- Top Subtitle Badge -->
+        <div class="hero-top-tag">
+          <span class="hero-dot-black"></span>
+          STANDAR KEMEWAHAN • EST. 2017 • TORONTO
+        </div>
+
+        <!-- Main Editorial Headline -->
+        <h1 class="hero-brand-statement">
+          Barbershop berkelas<br>
+          spesialis potongan rambut<br>
+          <span class="editorial-italic">pria modern dan gaya</span><br>
+          <span class="editorial-italic">pendek berpresisi tinggi</span>
+        </h1>
+
+        <!-- Subtitle Lead -->
+        <p class="hero-orange-desc">
+          Ambiens mewah yang konsisten, standar sterilisasi alat medis, dan master barber di 5 cabang Toronto. Rasakan presisi skin fade, arsitektur gunting klasik, dan ritual cukur handuk hangat.
+        </p>
+
+        <!-- Action Buttons (Pure Text, No Icons) -->
+        <div class="hero-orange-actions">
+          <button class="btn-black btn-magnetic open-booking-modal" data-cursor="PESAN">
+            <span>PESAN JADWAL CUKUR</span>
+          </button>
+
+          <a href="#locations" class="btn-outline-black btn-magnetic" data-cursor="CABANG">
+            <span>5 CABANG DI TORONTO</span>
+          </a>
+        </div>
+
+        <!-- Quick Trust Indicators -->
+        <div class="hero-orange-trust">
+          <span class="trust-item"><i class="fa-solid fa-star"></i> Rating 4.98 (2.400+ Ulasan Puas)</span>
+          <span class="trust-bullet">•</span>
+          <span class="trust-item">Kursi Kulit Mewah Takara Belmont</span>
+          <span class="trust-bullet">•</span>
+          <span class="trust-item">Bar Kopi Espresso Italia Gratis</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Marquee Ticker -->
+    <div class="marquee-container" aria-hidden="true">
+      <div class="marquee-content">
+        <div class="marquee-item">
+          <span>PRESISI TAILORED SKIN FADES</span>
+          <span class="marquee-separator"></span>
+          <span>RITUAL CUKUR PISAU LIPAT HANDUK HANGAT</span>
+          <span class="marquee-separator"></span>
+          <span>PERAWATAN KULIT KEPALA RESTORATIF</span>
+          <span class="marquee-separator"></span>
+          <span>ARSITEKTUR JENGGOT & KUMIS</span>
+          <span class="marquee-separator"></span>
+          <span>ESPRESSO ITALIA COMPLIMENTARY</span>
+          <span class="marquee-separator"></span>
+          <span>5 CABANG EKSKLUSIF DI TORONTO</span>
+          <span class="marquee-separator"></span>
+        </div>
+        <div class="marquee-item">
+          <span>PRESISI TAILORED SKIN FADES</span>
+          <span class="marquee-separator"></span>
+          <span>RITUAL CUKUR PISAU LIPAT HANDUK HANGAT</span>
+          <span class="marquee-separator"></span>
+          <span>PERAWATAN KULIT KEPALA RESTORATIF</span>
+          <span class="marquee-separator"></span>
+          <span>ARSITEKTUR JENGGOT & KUMIS</span>
+          <span class="marquee-separator"></span>
+          <span>ESPRESSO ITALIA COMPLIMENTARY</span>
+          <span class="marquee-separator"></span>
+          <span>5 CABANG EKSKLUSIF DI TORONTO</span>
+          <span class="marquee-separator"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Philosophy & The Experience Section -->
+    <section class="py-section philosophy-section" id="philosophy">
+      <div class="container">
+        <div class="philosophy-grid">
+          <div class="philosophy-text-stack">
+            <span class="badge-tag amber">FILOSOFI KAMI</span>
+            <h2 class="section-title-huge">
+              Sediakan Waktu untuk Diri Anda. <em>Ini Bukan Sekadar Potong Rambut.</em>
+            </h2>
+            <p class="philosophy-statement">
+              Tempat perlindungan di tengah hiruk-pikuk kota Toronto untuk melambat sejenak, menikmati kopi espresso segar, dan mempercayakan penampilan Anda kepada para master barber terbaik.
+            </p>
+
+            <div class="features-list">
+              <div class="feature-card">
+                <div class="feature-icon-box">
+                  <i class="fa-solid fa-scissors"></i>
+                </div>
+                <div>
+                  <h3 class="feature-title">Pengrajin Master & Potongan Rambut Modern</h3>
+                  <p class="feature-desc">Barber kami adalah seniman spesialis fade pendek modern, textured crop, dan perapian jenggot yang disesuaikan secara presisi dengan kontur wajah Anda.</p>
+                </div>
+              </div>
+
+              <div class="feature-card">
+                <div class="feature-icon-box">
+                  <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                  <h3 class="feature-title">Protokol Sterilisasi & Higienis Personal</h3>
+                  <p class="feature-desc">Setiap pelanggan mendapatkan set peralatan yang disterilkan secara individual sebelum digunakan, menjamin standar kebersihan dan keamanan mutlak.</p>
+                </div>
+              </div>
+
+              <div class="feature-card">
+                <div class="feature-icon-box">
+                  <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <div>
+                  <h3 class="feature-title">Bar Hospitality & Kopi Gratis</h3>
+                  <p class="feature-desc">Nikmati racikan espresso Italia asli, cappuccino, teh artisan, atau air mineral dingin di setiap sesi kunjungan Anda. Santai dan segarkan pikiran.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="philosophy-visual-stack">
+            <div class="main-visual-frame">
+              <img src="assets/images/craft.jpg" alt="Presisi Cukur Master Barber RendezVous" loading="lazy">
+            </div>
+            <div class="overlap-visual-card">
+              <img src="assets/images/shave.jpg" alt="Perawatan Cukur Handuk Hangat Tradisional" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         GIANT TYPOGRAPHIC EDITORIAL STATEMENT 1 (WHITE CANVAS MANIFESTO - 100VH)
+         ========================================================================== -->
+    <section class="editorial-giant-statement-section white-canvas" aria-label="Manifesto">
+      <div class="container">
+        <div class="statement-editorial-inner">
+          <h2 class="giant-statement-text">
+            <span class="statement-line-upright">When you look good,</span>
+            <span class="statement-line-italic">you feel good</span>
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services & Pricing Menu -->
+    <section class="py-section services-section" id="services">
+      <div class="container">
+        <div class="section-header-centered section-header-reveal">
+          <span class="badge-tag">MENU PERAWATAN</span>
+          <h2 class="section-title-huge">Layanan Eksklusif & <em>Daftar Harga</em></h2>
+          <p class="section-subtitle">Setiap layanan sudah mencakup konsultasi bentuk wajah, cuci rambut dengan sampo hangat, cukur bulu leher, dan minuman gratis.</p>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="services-filter-bar">
+          <button class="filter-pill active" data-filter="all">Semua Layanan</button>
+          <button class="filter-pill" data-filter="haircut">Potongan Rambut</button>
+          <button class="filter-pill" data-filter="shave">Cukur & Jenggot</button>
+          <button class="filter-pill" data-filter="package">Paket Kombinasi VIP</button>
+          <button class="filter-pill" data-filter="kids">Anak-Anak</button>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="services-grid">
+          <!-- Service 1 -->
+          <div class="service-card" data-category="haircut">
+            <div>
+              <div class="service-header">
+                <h3 class="service-name">The RendezVous Signature Cut</h3>
+                <div class="service-price">$48</div>
+              </div>
+              <div class="service-meta">
+                <span><i class="fa-regular fa-clock"></i> 40 MENIT</span>
+                <span>•</span>
+                <span>Paling Populer</span>
+              </div>
+              <p class="service-desc">Potongan rambut presisi khusus gaya rambut pendek modern. Sudah mencakup konsultasi wajah, cuci rambut hangat, perapian leher dengan pisau cukur, dan styling produk premium.</p>
+              <ul class="service-features-list">
+                <li><i class="fa-solid fa-check"></i> Arsitektur gunting & clipper berpresisi tinggi</li>
+                <li><i class="fa-solid fa-check"></i> Cukur garis tepi leher dengan busa hangat</li>
+                <li><i class="fa-solid fa-check"></i> Termasuk sajian espresso Italia / air mineral</li>
+              </ul>
+            </div>
+            <div class="service-card-footer">
+              <span class="text-muted" style="font-size: 0.8rem;">Termasuk cuci rambut</span>
+              <button class="service-book-btn open-booking-modal" data-service="The RendezVous Signature Cut" data-price="48">
+                PESAN LAYANAN <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="service-card" data-category="haircut">
+            <div>
+              <div class="service-header">
+                <h3 class="service-name">Skin Fade & Precision Taper</h3>
+                <div class="service-price">$52</div>
+              </div>
+              <div class="service-meta">
+                <span><i class="fa-regular fa-clock"></i> 45 MENIT</span>
+                <span>•</span>
+                <span>Spesialis Fade</span>
+              </div>
+              <p class="service-desc">Gradasi fade mulus (low, mid, atau high) yang disesuaikan dengan bentuk kepala menggunakan foil shaver untuk hasil bersih tanpa bayangan rambut.</p>
+              <ul class="service-features-list">
+                <li><i class="fa-solid fa-check"></i> Finishing foil shaver untuk hasil zero-gap ekstra halus</li>
+                <li><i class="fa-solid fa-check"></i> Penataan garis pelipis dan batas rambut presisi</li>
+                <li><i class="fa-solid fa-check"></i> Aplikasi styling matte texturizing dust atau clay</li>
+              </ul>
+            </div>
+            <div class="service-card-footer">
+              <span class="text-muted" style="font-size: 0.8rem;">Hasil zero-gap ultra bersih</span>
+              <button class="service-book-btn open-booking-modal" data-service="Skin Fade & Precision Taper" data-price="52">
+                PESAN LAYANAN <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="service-card" data-category="shave">
+            <div>
+              <div class="service-header">
+                <h3 class="service-name">Royal Hot Towel Straight Razor Shave</h3>
+                <div class="service-price">$42</div>
+              </div>
+              <div class="service-meta">
+                <span><i class="fa-regular fa-clock"></i> 35 MENIT</span>
+                <span>•</span>
+                <span>Ritual Klasik</span>
+              </div>
+              <p class="service-desc">Ritual cukur pisau lipat tradisional dengan 3 lapis handuk hangat beraroma eucalyptus, busa krim hangat, cukuran pisau baja Jepang, dan aftershave dingin.</p>
+              <ul class="service-features-list">
+                <li><i class="fa-solid fa-check"></i> Handuk uap hangat minyak esensial organik</li>
+                <li><i class="fa-solid fa-check"></i> Cukuran halus pisau lipat baja Jepang</li>
+                <li><i class="fa-solid fa-check"></i> Handuk dingin penutup pori-pori & balsem penyejuk</li>
+              </ul>
+            </div>
+            <div class="service-card-footer">
+              <span class="text-muted" style="font-size: 0.8rem;">Ritual cukur tradisional</span>
+              <button class="service-book-btn open-booking-modal" data-service="Royal Hot Towel Straight Razor Shave" data-price="42">
+                PESAN LAYANAN <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="service-card" data-category="shave">
+            <div>
+              <div class="service-header">
+                <h3 class="service-name">Beard Architecture & Razor Lineup</h3>
+                <div class="service-price">$35</div>
+              </div>
+              <div class="service-meta">
+                <span><i class="fa-regular fa-clock"></i> 30 MENIT</span>
+                <span>•</span>
+                <span>Arsitektur Jenggot</span>
+              </div>
+              <p class="service-desc">Pembentukan struktur jenggot, gradasi panjang yang rapi, garis pipi tajam dengan pisau cukur, handuk uap hangat, dan pijat minyak sandalwood.</p>
+              <ul class="service-features-list">
+                <li><i class="fa-solid fa-check"></i> Garis pipi dan leher simetris geometris</li>
+                <li><i class="fa-solid fa-check"></i> Detail kumis dan gradasi rambut liar</li>
+                <li><i class="fa-solid fa-check"></i> Nutrisi balsem sandalwood hangat</li>
+              </ul>
+            </div>
+            <div class="service-card-footer">
+              <span class="text-muted" style="font-size: 0.8rem;">Termasuk handuk hangat</span>
+              <button class="service-book-btn open-booking-modal" data-service="Beard Architecture & Razor Lineup" data-price="35">
+                PESAN LAYANAN <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="service-card" data-category="package">
+            <div>
+              <div class="service-header">
+                <h3 class="service-name">The Full RendezVous: Cut & Beard Sculpt</h3>
+                <div class="service-price">$78</div>
+              </div>
+              <div class="service-meta">
+                <span><i class="fa-regular fa-clock"></i> 65 MENIT</span>
+                <span>•</span>
+                <span>Paket Eksekutif</span>
+              </div>
+              <p class="service-desc">Sesi perawatan master terlengkap. Potongan rambut kustom atau skin fade dipadukan dengan arsitektur jenggot penuh, handuk hangat ganda, dan minuman pilihan.</p>
+              <ul class="service-features-list">
+                <li><i class="fa-solid fa-check"></i> Potongan rambut signature / skin fade pilihan</li>
+                <li><i class="fa-solid fa-check"></i> Pembentukan jenggot dengan pisau lipat tajam</li>
+                <li><i class="fa-solid fa-check"></i> Pijat relaksasi kulit kepala & styling lengkap</li>
+              </ul>
+            </div>
+            <div class="service-card-footer">
+              <span class="text-muted" style="font-size: 0.8rem;">Paket perawatan terbaik</span>
+              <button class="service-book-btn open-booking-modal" data-service="The Full RendezVous: Cut & Beard Sculpt" data-price="78">
+                PESAN LAYANAN <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="service-card" data-category="kids">
+            <div>
+              <div class="service-header">
+                <h3 class="service-name">Junior Grooming (14 Tahun ke Bawah)</h3>
+                <div class="service-price">$36</div>
+              </div>
+              <div class="service-meta">
+                <span><i class="fa-regular fa-clock"></i> 30 MENIT</span>
+                <span>•</span>
+                <span>Anak & Remaja</span>
+              </div>
+              <p class="service-desc">Pengalaman potong rambut yang sabar dan berkualitas tinggi khusus untuk pria muda usia 14 tahun ke bawah. Suasana santai dengan hasil potongan rapi.</p>
+              <ul class="service-features-list">
+                <li><i class="fa-solid fa-check"></i> Gaya rambut modern anak dan remaja</li>
+                <li><i class="fa-solid fa-check"></i> Gunting presisi dan clipper bersuara halus</li>
+                <li><i class="fa-solid fa-check"></i> Jus atau camilan manis gratis</li>
+              </ul>
+            </div>
+            <div class="service-card-footer">
+              <span class="text-muted" style="font-size: 0.8rem;">Usia 14 tahun ke bawah</span>
+              <button class="service-book-btn open-booking-modal" data-service="Junior Grooming (14 Tahun ke Bawah)" data-price="36">
+                PESAN LAYANAN <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 Havens Across Toronto -->
+    <section class="py-section locations-section" id="locations">
+      <div class="container">
+        <div class="section-header-centered section-header-reveal">
+          <span class="badge-tag amber">CABANG KAMI</span>
+          <h2 class="section-title-huge">5 Cabang Eksklusif <em>di Toronto</em></h2>
+          <p class="section-subtitle">Ambiens mewah yang konsisten, protokol alat steril medis, dan master barber di setiap kawasan utama Toronto. Menerima walk-in sesuai ketersediaan; reservasi sangat disarankan.</p>
+        </div>
+
+        <!-- Controls & View Bar -->
+        <div class="locations-controls-bar">
+          <div class="locations-filter-tabs">
+            <button class="loc-tab-btn active" data-filter="all">Semua 5 Cabang</button>
+            <button class="loc-tab-btn" data-filter="downtown">Pusat Kota (Downtown)</button>
+            <button class="loc-tab-btn" data-filter="financial">Kawasan Finansial</button>
+            <button class="loc-tab-btn" data-filter="fashion">Kawasan Mode (King West)</button>
+            <button class="loc-tab-btn" data-filter="scarborough">Scarborough Flagship</button>
+            <button class="loc-tab-btn" data-filter="east">Downtown East</button>
+          </div>
+
+          <div class="view-switcher-group">
+            <button class="view-toggle-btn active" data-view="showcase">
+              <i class="fa-solid fa-grip"></i> TAMPILAN GRID
+            </button>
+            <button class="view-toggle-btn" data-view="map">
+              <i class="fa-solid fa-map-location-dot"></i> PETA INTERAKTIF
+            </button>
+          </div>
+        </div>
+
+        <!-- VIEW 1: Showcase Grid -->
+        <div class="locations-showcase-wrap" id="locationsShowcaseView">
+          
+          <!-- Flagship Hero Card: Queen St West -->
+          <div class="location-flagship-card" data-district="downtown">
+            <div class="flagship-photo-wrap">
+              <img src="assets/images/loc_queen.jpg" alt="Interior Barbershop Rendezvous Queen Street West" loading="lazy">
+              <div class="flagship-photo-badge">FLAGSHIP PUSAT KOTA TORONTO</div>
+            </div>
+            <div class="flagship-details-wrap">
+              <div class="flagship-header">
+                <div class="live-status-pill open" data-shop-schedule="queen">
+                  <span class="live-dot open"></span> BUKA SEKARANG • Tutup 20:00
+                </div>
+                <h3 class="flagship-title">Queen St West</h3>
+                <p class="flagship-sub">309 Queen St W, Toronto, ON M5V 2A4 • Downtown Core</p>
+              </div>
+
+              <div class="flagship-amenities-row">
+                <div class="amenity-item"><i class="fa-solid fa-chair"></i> 8 Kursi Master</div>
+                <div class="amenity-item"><i class="fa-solid fa-train-subway"></i> 2 menit dari Stasiun Osgoode</div>
+                <div class="amenity-item"><i class="fa-solid fa-mug-saucer"></i> Bar Kopi Espresso</div>
+                <div class="amenity-item"><i class="fa-solid fa-square-parking"></i> Parkir Jalan</div>
+              </div>
+
+              <div class="location-info-list" style="margin: 0 0 1.75rem;">
+                <div class="loc-info-item">
+                  <i class="fa-solid fa-phone"></i>
+                  <a href="tel:+14165962383">+1 416-596-2383</a>
+                </div>
+                <div class="loc-info-item">
+                  <i class="fa-regular fa-clock"></i>
+                  <span>Sen - Sab: 09:00 – 20:00 | Min: 10:00 – 18:00</span>
+                </div>
+              </div>
+
+              <div class="location-actions">
+                <button class="btn-primary open-booking-modal" data-location="Queen St West (Downtown Core)">
+                  PESAN DI QUEEN ST
+                </button>
+                <a href="https://maps.app.goo.gl/XF4AGojWwD1tEs6t6" target="_blank" rel="noopener" class="btn-secondary">
+                  PETUNJUK ARAH
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Symmetrical District Cards -->
+          <div class="locations-quad-grid">
+            
+            <!-- Location 2: Scarborough Flagship -->
+            <div class="location-card" data-district="scarborough">
+              <div class="loc-card-media">
+                <img src="assets/images/loc_scarborough.jpg" alt="Rendezvous Scarborough Flagship Barbershop" loading="lazy">
+                <div class="loc-card-district-badge">CABANG PERTAMA</div>
+              </div>
+              <div class="loc-card-body">
+                <div>
+                  <div class="live-status-pill open" data-shop-schedule="scarborough">
+                    <span class="live-dot open"></span> BUKA SEKARANG • Tutup 20:00
+                  </div>
+                  <h3 class="loc-card-title">Scarborough</h3>
+                  <div class="location-info-list">
+                    <div class="loc-info-item">
+                      <i class="fa-solid fa-location-dot"></i>
+                      <span>2078 Lawrence Ave E Unit A, Scarborough, ON M1R 2Z4</span>
+                    </div>
+                    <div class="loc-info-item">
+                      <i class="fa-solid fa-phone"></i>
+                      <a href="tel:+14162851644">+1 416-285-1644</a>
+                    </div>
+                    <div class="loc-info-item">
+                      <i class="fa-regular fa-clock"></i>
+                      <span>Sen - Sab: 09:00 – 20:00<br>Min: 10:00 – 18:00</span>
+                    </div>
+                    <div class="loc-info-item">
+                      <i class="fa-solid fa-square-parking"></i>
+                      <span>Area Parkir Plaza Gratis</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="location-actions">
+                  <button class="btn-primary open-booking-modal" data-location="Scarborough (Founding Flagship)">
+                    PESAN SCARBOROUGH
+                  </button>
+                  <a href="https://maps.app.goo.gl/dUbeE8XW1huU1Ngg8" target="_blank" rel="noopener" class="btn-secondary">
+                    PETA
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Location 3: Yonge & Wellington -->
+            <div class="location-card" data-district="financial">
+              <div class="loc-card-media">
+                <img src="assets/images/loc_yonge.jpg" alt="Rendezvous Yonge and Wellington Financial District Barbershop" loading="lazy">
+                <div class="loc-card-district-badge">KAWASAN FINANSIAL</div>
+              </div>
+              <div class="loc-card-body">
+                <div>
+                  <div class="live-status-pill open" data-shop-schedule="yonge">
+                    <span class="live-dot open"></span> BUKA SEKARANG • Tutup 19:30
+                  </div>
+                  <h3 class="loc-card-title">Yonge & Wellington</h3>
+                  <div class="location-info-list">
+                    <div class="loc-info-item">
+                      <i class="fa-solid fa-location-dot"></i>
+                      <span>33 Yonge St #110, Toronto, ON M5E 0A9</span>
+                    </div>
+                    <div class="loc-info-item">
+                      <i class="fa-solid fa-phone"></i>
+                      <a href="tel:+14163041333">+1 416-304-1333</a>
+                    </div>
+                    <div class="loc-info-item">
+                      <i class="fa-regular fa-clock"></i>
+                      <span>Sen - Jum: 08:00 – 19:30<br>Sab - Min: 10:00 – 17:30</span>
+                    </div>
+                    <div class="loc-info-item">
+                      <i class="fa-solid fa-train-subway"></i>
+                      <span>Akses Langsung Jalur PATH & Stasiun Union</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="location-actions">
+                  <button class="btn-primary open-booking-modal" data-location="Yonge & Wellington (Financial Dist)">
+                    PESAN FINANCIAL DIST
+                  </button>
+                  <a href="https://maps.app.goo.gl/S9sx39iTZzB6Ght86" target="_blank" rel="noopener" class="btn-secondary">
+                    PETA
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Location 4: King & Bathurst -->
+            <div class="location-card" data-district="fashion">
+              <div class="loc-card-media">
+                <img src="assets/images/loc_king.jpg" alt="Rendezvous King Street West Fashion District Barbershop" loading="lazy">
+                <div class="loc-card-district-badge">KAWASAN MODE</div>
+              </div>
+              <div class="loc-card-body">
+                <div>
+                  <div class="live-status-pill open" data-shop-schedule="king">
+                    <span class="live-dot open"></span> BUKA SEKARANG • Tutup 20:00
+                  </div>
+                  <h3 class="loc-card-title">King St & Bathurst</h3>
+                  <div class="location-info-list">
+                    <div class="loc-info-item">
+                      <i class="fa-solid fa-location-dot"></i>
+                      <span>720 King St W Unit 135, Toronto, ON M5V 3S5</span>
+                    </div>
+                    <div class="loc-info-item">
+                      <i class="fa-solid fa-phone"></i>
+                      <a href="tel:+14164394265">+1 416-439-4265</a>
+                    </div>
+                    <div class="loc-info-item">
+                      <i class="fa-regular fa-clock"></i>
+                      <span>Sen - Sab: 09:30 – 20:00<br>Min: 10:00 – 18:00</span>
+                    </div>
+                    <div class="loc-info-item">
+                      <i class="fa-solid fa-bus"></i>
+                      <span>Trem 504 King tepat di depan pintu</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="location-actions">
+                  <button class="btn-primary open-booking-modal" data-location="King St & Bathurst (Fashion Dist)">
+                    PESAN KING & BATHURST
+                  </button>
+                  <a href="https://maps.app.goo.gl/rNzDKVra24PkTvv76" target="_blank" rel="noopener" class="btn-secondary">
+                    PETA
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Location 5: Mutual St -->
+            <div class="location-card" data-district="east">
+              <div class="loc-card-media">
+                <img src="assets/images/loc_mutual.jpg" alt="Rendezvous Mutual Street Downtown East Barbershop" loading="lazy">
+                <div class="loc-card-district-badge">DOWNTOWN EAST</div>
+              </div>
+              <div class="loc-card-body">
+                <div>
+                  <div class="live-status-pill open" data-shop-schedule="mutual">
+                    <span class="live-dot open"></span> BUKA SEKARANG • Tutup 19:30
+                  </div>
+                  <h3 class="loc-card-title">Mutual St</h3>
+                  <div class="location-info-list">
+                    <div class="loc-info-item">
+                      <i class="fa-solid fa-location-dot"></i>
+                      <span>30 Mutual St Unit 3, Toronto, ON M5B 2A7</span>
+                    </div>
+                    <div class="loc-info-item">
+                      <i class="fa-solid fa-phone"></i>
+                      <a href="tel:+14164394265">+1 416-439-4265</a>
+                    </div>
+                    <div class="loc-info-item">
+                      <i class="fa-regular fa-clock"></i>
+                      <span>Sen - Sab: 09:00 – 19:30<br>Min: 10:00 – 17:00</span>
+                    </div>
+                    <div class="loc-info-item">
+                      <i class="fa-solid fa-train-subway"></i>
+                      <span>Dekat Stasiun Subway Dundas & Queen</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="location-actions">
+                  <button class="btn-primary open-booking-modal" data-location="Mutual St (Downtown East)">
+                    PESAN MUTUAL ST
+                  </button>
+                  <a href="https://maps.app.goo.gl/MA6ET9LteAbv4QPw6" target="_blank" rel="noopener" class="btn-secondary">
+                    PETA
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dynamic Shop Card on Map Select -->
+            <div class="map-shop-previews-stack">
+              
+              <div class="map-shop-preview-card active" id="mapCardQueen">
+                <span class="badge-tag">DOWNTOWN CORE</span>
+                  <a href="https://maps.app.goo.gl/XF4AGojWwD1tEs6t6" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.75rem 1rem; font-size: 0.85rem;"><i class="fa-solid fa-diamond-turn-right"></i></a>
+                </div>
+              </div>
+
+              <div class="map-shop-preview-card" id="mapCardYonge">
+                <span class="badge-tag">KAWASAN FINANSIAL</span>
+                <h3 class="font-serif text-cream" style="font-size: 1.5rem; margin-bottom: 0.5rem;">Yonge & Wellington</h3>
+                <p class="text-muted" style="font-size: 0.88rem; margin-bottom: 1rem;">33 Yonge St #110, Toronto ON • Akses Langsung PATH & Union</p>
+                <div class="live-status-pill open" data-shop-schedule="yonge" style="margin-bottom: 1.25rem;">
+                  <span class="live-dot open"></span> BUKA SEKARANG • Tutup 19:30
+                </div>
+                <div style="display: flex; gap: 0.75rem;">
+                  <button class="btn-primary open-booking-modal" data-location="Yonge & Wellington (Financial Dist)" style="padding: 0.75rem 1.25rem; font-size: 0.85rem;">PESAN SEKARANG</button>
+                  <a href="https://maps.app.goo.gl/S9sx39iTZzB6Ght86" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.75rem 1rem; font-size: 0.85rem;"><i class="fa-solid fa-diamond-turn-right"></i></a>
+                </div>
+              </div>
+
+              <div class="map-shop-preview-card" id="mapCardKing">
+                <span class="badge-tag">KAWASAN MODE</span>
+                <h3 class="font-serif text-cream" style="font-size: 1.5rem; margin-bottom: 0.5rem;">King St & Bathurst</h3>
+                <p class="text-muted" style="font-size: 0.88rem; margin-bottom: 1rem;">720 King St W #135, Toronto ON • Trem 504 King</p>
+                <div class="live-status-pill open" data-shop-schedule="king" style="margin-bottom: 1.25rem;">
+                  <span class="live-dot open"></span> BUKA SEKARANG • Tutup 20:00
+                </div>
+                <div style="display: flex; gap: 0.75rem;">
+                  <button class="btn-primary open-booking-modal" data-location="King St & Bathurst (Fashion Dist)" style="padding: 0.75rem 1.25rem; font-size: 0.85rem;">PESAN SEKARANG</button>
+                  <a href="https://maps.app.goo.gl/rNzDKVra24PkTvv76" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.75rem 1rem; font-size: 0.85rem;"><i class="fa-solid fa-diamond-turn-right"></i></a>
+                </div>
+              </div>
+
+              <div class="map-shop-preview-card" id="mapCardMutual">
+                <span class="badge-tag">DOWNTOWN EAST</span>
+                <h3 class="font-serif text-cream" style="font-size: 1.5rem; margin-bottom: 0.5rem;">Mutual St</h3>
+                <p class="text-muted" style="font-size: 0.88rem; margin-bottom: 1rem;">30 Mutual St #3, Toronto ON • Dekat Dundas Square</p>
+                <div class="live-status-pill open" data-shop-schedule="mutual" style="margin-bottom: 1.25rem;">
+                  <span class="live-dot open"></span> BUKA SEKARANG • Tutup 19:30
+                </div>
+                <div style="display: flex; gap: 0.75rem;">
+                  <button class="btn-primary open-booking-modal" data-location="Mutual St (Downtown East)" style="padding: 0.75rem 1.25rem; font-size: 0.85rem;">PESAN SEKARANG</button>
+                  <a href="https://maps.app.goo.gl/MA6ET9LteAbv4QPw6" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.75rem 1rem; font-size: 0.85rem;"><i class="fa-solid fa-diamond-turn-right"></i></a>
+                </div>
+              </div>
+
+              <div class="map-shop-preview-card" id="mapCardScarborough">
+                <span class="badge-tag">CABANG PERTAMA</span>
+                <h3 class="font-serif text-cream" style="font-size: 1.5rem; margin-bottom: 0.5rem;">Scarborough Flagship</h3>
+                <p class="text-muted" style="font-size: 0.88rem; margin-bottom: 1rem;">2078 Lawrence Ave E, Scarborough ON • Parkir Gratis</p>
+                <div class="live-status-pill open" data-shop-schedule="scarborough" style="margin-bottom: 1.25rem;">
+                  <span class="live-dot open"></span> BUKA SEKARANG • Tutup 20:00
+                </div>
+                <div style="display: flex; gap: 0.75rem;">
+                  <button class="btn-primary open-booking-modal" data-location="Scarborough (Founding Flagship)" style="padding: 0.75rem 1.25rem; font-size: 0.85rem;">PESAN SEKARANG</button>
+                  <a href="https://maps.app.goo.gl/dUbeE8XW1huU1Ngg8" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.75rem 1rem; font-size: 0.85rem;"><i class="fa-solid fa-diamond-turn-right"></i></a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Master Barbers Showcase -->
+    <section class="py-section team-section" id="team">
+      <div class="container">
+        <div class="section-header-centered section-header-reveal">
+          <span class="badge-tag">PENGRAJIN BLADE</span>
+          <h2 class="section-title-huge">Kenali <em>Tim Master Barber</em> Kami</h2>
+          <p class="section-subtitle">Para profesional berdedikasi dengan jam terbang ribuan jam, memadukan teknik gunting klasik dengan tren modern.</p>
+        </div>
+
+        <div class="team-grid">
+          <!-- Barber 1: Issa -->
+          <div class="barber-card">
+            <div class="barber-photo-box">
+              <img src="assets/images/barber_issa.jpg" alt="Issa - Founder & Master Barber" loading="lazy">
+              <span class="barber-badge-role">FOUNDER • MASTER BARBER</span>
+            </div>
+            <div class="barber-info">
+              <h3 class="barber-name">Issa</h3>
+              <p class="barber-specialty">Presisi Skin Taper • Textured Crop Architecture • Pengalaman 12+ Tahun</p>
+              <button class="barber-book-cta open-booking-modal" data-barber="Issa (Master Barber)">
+                <span>PESAN DENGAN ISSA</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Barber 2: Stas -->
+          <div class="barber-card">
+            <div class="barber-photo-box">
+              <img src="assets/images/barber_stas.jpg" alt="Stas - Fade Specialist" loading="lazy">
+              <span class="barber-badge-role">SPESIALIS FADE</span>
+            </div>
+            <div class="barber-info">
+              <h3 class="barber-name">Stas</h3>
+              <p class="barber-specialty">Skin Fade Tajam • High Contrast Graduation • Pengalaman 8+ Tahun</p>
+              <button class="barber-book-cta open-booking-modal" data-barber="Stas (Fade Specialist)">
+                <span>PESAN DENGAN STAS</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Barber 3: Cesar -->
+          <div class="barber-card">
+            <div class="barber-photo-box">
+              <img src="assets/images/barber_cesar.jpg" alt="Cesar - Royal Shave Master" loading="lazy">
+              <span class="barber-badge-role">MASTER CUKUR & JENGGOT</span>
+            </div>
+            <div class="barber-info">
+              <h3 class="barber-name">Cesar</h3>
+              <p class="barber-specialty">Ritual Cukur Handuk Hangat • Arsitektur Bentuk Wajah • Pengalaman 9+ Tahun</p>
+              <button class="barber-book-cta open-booking-modal" data-barber="Cesar (Beard Master)">
+                <span>PESAN DENGAN CESAR</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Barber 4: Hamo -->
+          <div class="barber-card">
+            <div class="barber-photo-box">
+              <img src="assets/images/barber_hamo.jpg" alt="Hamo - Senior Stylist" loading="lazy">
+              <span class="barber-badge-role">SENIOR STYLIST</span>
+            </div>
+            <div class="barber-info">
+              <h3 class="barber-name">Hamo</h3>
+              <p class="barber-specialty">Potongan Gunting Eksekutif • Terapi Relaksasi Kulit Kepala • Pengalaman 7+ Tahun</p>
+              <button class="barber-book-cta open-booking-modal" data-barber="Hamo (Senior Stylist)">
+                <span>PESAN DENGAN HAMO</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lookbook & Style Gallery -->
+    <section class="py-section lookbook-section" id="lookbook">
+      <div class="container">
+        <div class="section-header-centered section-header-reveal">
+          <span class="badge-tag amber">GALERI GAYA</span>
+          <h2 class="section-title-huge">Arsip Lookbook <em>Gaya Rambut</em></h2>
+          <p class="section-subtitle">Kurasi potongan rambut presisi dan transformasi jenggot pria modern. Klik gaya pilihan Anda untuk langsung memesan jadwal.</p>
+        </div>
+
+        <div class="lookbook-grid">
+          <!-- Style 1 -->
+          <div class="lookbook-item" data-cursor="LIHAT">
+            <img src="assets/images/lookbook.jpg" alt="Executive Low Taper Fade" loading="lazy">
+            <div class="lookbook-overlay">
+              <div class="lookbook-category">GAYA KLASIK • 40 MENIT</div>
+              <h3 class="lookbook-title">The Executive Low Taper</h3>
+              <button class="book-style-direct-btn" data-style="Executive Low Taper" data-service="Skin Fade & Precision Taper" data-price="52">
+                <i class="fa-solid fa-scissors"></i> PILIH GAYA INI ($52)
+              </button>
+            </div>
+          </div>
+
+          <!-- Style 2 -->
+          <div class="lookbook-item" data-cursor="LIHAT">
+            <img src="assets/images/craft.jpg" alt="Textured French Crop" loading="lazy">
+            <div class="lookbook-overlay">
+              <div class="lookbook-category">ARSITEKTUR MODERN</div>
+              <h3 class="lookbook-title">Textured French Crop</h3>
+              <button class="book-style-direct-btn" data-style="Textured French Crop" data-service="The RendezVous Signature Cut" data-price="48">
+                <i class="fa-solid fa-scissors"></i> PILIH GAYA INI ($48)
+              </button>
+            </div>
+          </div>
+
+          <!-- Style 3 -->
+          <div class="lookbook-item" data-cursor="LIHAT">
+            <img src="assets/images/shave.jpg" alt="Hot Towel Razor Shave" loading="lazy">
+            <div class="lookbook-overlay">
+              <div class="lookbook-category">RITUAL TRADISIONAL</div>
+              <h3 class="lookbook-title">Hot Towel Razor Shave</h3>
+              <button class="book-style-direct-btn" data-style="Royal Hot Towel Shave" data-service="Royal Hot Towel Straight Razor Shave" data-price="42">
+                <i class="fa-solid fa-scissors"></i> PILIH GAYA INI ($42)
+              </button>
+            </div>
+          </div>
+
+          <!-- Style 4 -->
+          <div class="lookbook-item" data-cursor="LIHAT">
+            <img src="assets/images/loc_king.jpg" alt="Defined Beard Architecture" loading="lazy">
+            <div class="lookbook-overlay">
+              <div class="lookbook-category">ARSITEKTUR JENGGOT</div>
+              <h3 class="lookbook-title">Defined Beard Architecture</h3>
+              <button class="book-style-direct-btn" data-style="Beard Architecture" data-service="Beard Architecture & Razor Lineup" data-price="35">
+                <i class="fa-solid fa-scissors"></i> PILIH GAYA INI ($35)
+              </button>
+            </div>
+          </div>
+
+          <!-- Style 5 -->
+          <div class="lookbook-item" data-cursor="LIHAT">
+            <img src="assets/images/loc_yonge.jpg" alt="The Full Executive Reset" loading="lazy">
+            <div class="lookbook-overlay">
+              <div class="lookbook-category">RITUAL LENGKAP • 65 MENIT</div>
+              <h3 class="lookbook-title">The Full RendezVous</h3>
+              <button class="book-style-direct-btn" data-style="The Full RendezVous Combo" data-service="The Full RendezVous: Cut & Beard Sculpt" data-price="78">
+                <i class="fa-solid fa-scissors"></i> PILIH GAYA INI ($78)
+              </button>
+            </div>
+          </div>
+
+          <!-- Style 6 -->
+          <div class="lookbook-item" data-cursor="LIHAT">
+            <img src="assets/images/hero.jpg" alt="Foil Skin Fade & Part" loading="lazy">
+            <div class="lookbook-overlay">
+              <div class="lookbook-category">ZERO SHADOW BLENDING</div>
+              <h3 class="lookbook-title">Foil Skin Fade & Part</h3>
+              <button class="book-style-direct-btn" data-style="Foil Skin Fade" data-service="Skin Fade & Precision Taper" data-price="52">
+                <i class="fa-solid fa-scissors"></i> PILIH GAYA INI ($52)
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         GIANT TYPOGRAPHIC EDITORIAL STATEMENT 2 (DARK CANVAS & APP CALLOUT)
+         ========================================================================== -->
+    <section class="editorial-giant-statement-section dark-canvas" aria-label="Book via App">
+      <div class="container">
+        <div class="statement-editorial-inner">
+          <h2 class="giant-statement-text-dark">
+            <span class="statement-line-italic">or via app</span>
+          </h2>
+          
+          <div class="editorial-app-callout-grid">
+            <div class="editorial-app-badges-group">
+              <button class="app-store-pill-btn open-booking-modal" data-cursor="PESAN">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>BOOK APPOINTMENT</span>
+              </button>
+              <a href="#locations" class="app-store-pill-btn secondary" data-cursor="CABANG">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>5 TORONTO SHOPS</span>
+              </a>
+            </div>
+
+            <div class="editorial-mono-block">
+              <p>
+                YOU CAN ALSO FOLLOW THE SAME PROCESS THROUGH OUR BRANDED WEB PORTAL & APP, WHICH KEEPS YOU LOGGED IN SO YOU DON'T HAVE TO ENTER YOUR PERSONAL DETAILS EACH TIME YOU BOOK. ALL APPOINTMENT HISTORY AND DETAILS WILL BE STORED IN ONE EASILY ACCESSIBLE PLACE.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Client Reviews -->
+    <section class="py-section testimonials-section" id="reviews">
+      <div class="container">
+        <div class="section-header-centered section-header-reveal">
+          <span class="badge-tag">REPUTASI</span>
+          <h2 class="section-title-huge">Kata Pelanggan <em>Setia Kami</em></h2>
+          <p class="section-subtitle">Lebih dari 2.400 ulasan bintang lima di Google dari para eksekutif, kreator, dan pria berkelas di seluruh Toronto.</p>
+        </div>
+      </div>
+
+      <!-- Infinite Scroll Testimonial Marquee -->
+      <div class="testimonials-carousel-container">
+        <div class="testimonials-track">
+          <!-- Review 1 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">“Sudah tiga kali berkunjung ke Rendezvous Wellington dan pelayanannya selalu luar biasa. Hamo adalah barber yang hebat, tekniknya kelas atas dan hospitality-nya terbaik di Toronto.”</p>
+            <div class="testimonial-author">
+              <span class="author-name">Zoheb</span>
+              <span class="author-location"><i class="fa-solid fa-location-dot"></i> Yonge & Wellington</span>
+            </div>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">“Pengalaman yang luar biasa, Stas benar-benar salah satu barber terbaik di kota! Interior mewah dengan sajian espresso gratis, kursi Takara yang sangat nyaman, dan staf yang ramah.”</p>
+            <div class="testimonial-author">
+              <span class="author-name">Evan M.</span>
+              <span class="author-location"><i class="fa-solid fa-location-dot"></i> Queen St West</span>
+            </div>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">“Barbershop TERBAIK di seluruh GTA. Potongan rambutnya rapi sempurna, protokol alat sterilnya sangat profesional, Cesar sangat ramah dan teliti. Sangat direkomendasikan 10/10.”</p>
+            <div class="testimonial-author">
+              <span class="author-name">Andres K.</span>
+              <span class="author-location"><i class="fa-solid fa-location-dot"></i> Scarborough Flagship</span>
+            </div>
+          </div>
+
+          <!-- Review 4 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">“Rendezvous di King West adalah tempat yang luar biasa. Suasana nyaman, percakapan hangat, dan hasil skin fade presisi setiap kali saya berkunjung.”</p>
+            <div class="testimonial-author">
+              <span class="author-name">Paul R.</span>
+              <span class="author-location"><i class="fa-solid fa-location-dot"></i> King St & Bathurst</span>
+            </div>
+          </div>
+
+          <!-- Review 5 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">“Issa adalah yang terbaik! Sangat profesional, detail luar biasa, dan efisien. Pasti akan selalu kembali ke sini.”</p>
+            <div class="testimonial-author">
+              <span class="author-name">Edson V.</span>
+              <span class="author-location"><i class="fa-solid fa-location-dot"></i> Yonge & Wellington</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Digital Gift Card & VIP Club Portal -->
+    <section class="py-section giftcard-section" id="giftcards">
+      <div class="container">
+        <div class="section-header-centered section-header-reveal">
+          <span class="badge-tag amber">VOUCHER EKSKLUSIF</span>
+          <h2 class="section-title-huge">Kartu Hadiah Digital <em>& Akses VIP</em></h2>
+          <p class="section-subtitle">Berikan hadiah perawatan berkelas untuk orang terdekat, rekan kerja, atau diri Anda sendiri. Berlaku di 5 cabang Toronto tanpa tanggal kadaluarsa.</p>
+        </div>
+
+        <div class="giftcard-portal-grid">
+          <!-- Gift Card Form Controls -->
+          <div class="gc-control-box">
+            <h3 class="font-serif text-cream" style="font-size: 1.5rem; margin-bottom: 0.5rem;">Kustomisasi Voucher Hadiah</h3>
+            <p class="text-muted" style="font-size: 0.88rem; margin-bottom: 1.5rem;">Pilih nominal dan sesuaikan pesan khusus secara real-time:</p>
+
+            <label class="text-muted" style="font-size: 0.8rem; font-family: var(--font-mono);">PILIH NOMINAL VOUCHER (CAD)</label>
+            <div class="gc-amount-presets">
+              <button class="gc-amount-btn" data-amount="50">$50</button>
+              <button class="gc-amount-btn selected" data-amount="100">$100</button>
+              <button class="gc-amount-btn" data-amount="150">$150</button>
+              <button class="gc-amount-btn" data-amount="250">$250</button>
+            </div>
+
+            <div style="margin-bottom: 1.25rem;">
+              <label class="text-muted" style="font-size: 0.8rem; font-family: var(--font-mono);">NOMINAL LAIN ($ CAD)</label>
+              <input type="number" class="gc-form-input" id="gcCustomAmount" placeholder="Atau masukkan nominal kustom (misal: 75)">
+            </div>
+
+            <div style="margin-bottom: 1.25rem;">
+              <label class="text-muted" style="font-size: 0.8rem; font-family: var(--font-mono);">NAMA LENGKAP PENERIMA</label>
+              <input type="text" class="gc-form-input" id="gcRecipientInput" placeholder="Contoh: Alexander Wright">
+            </div>
+
+            <div style="margin-bottom: 1.75rem;">
+              <label class="text-muted" style="font-size: 0.8rem; font-family: var(--font-mono);">PESAN KHUSUS / UCAPAN</label>
+              <input type="text" class="gc-form-input" id="gcMessageInput" placeholder="Contoh: Selamat Ulang Tahun! Nikmati perawatan spesial ini.">
+            </div>
+
+            <button class="btn-primary" id="gcIssueBtn" style="width: 100%;">
+              <i class="fa-solid fa-gift"></i> BUAT VOUCHER DIGITAL SEKARANG
+            </button>
+
+            <div id="gcSuccessNotice" style="display: none; margin-top: 1rem; padding: 0.9rem; background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3); border-radius: 12px; font-size: 0.85rem; color: #4ADE80;">
+              <i class="fa-solid fa-circle-check"></i> Voucher Hadiah Digital Berhasil Dibuat! Tunjukkan kode <strong>#RDV-GIFT-2026</strong> saat pembayaran di kasir cabang manapun.
+            </div>
+          </div>
+
+          <!-- Live Visual Preview Card -->
+          <div class="gc-visual-preview-card">
+            <div class="gc-card-brand-row">
+              <div>
+                <div class="gc-brand-text">RENDEZVOUS<span class="text-orange">.</span></div>
+                <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--orange-primary); letter-spacing: 2px;">TORONTO GROOMING HAVEN</div>
+              </div>
+              <div class="gc-chip-icon"></div>
+            </div>
+
+            <div>
+              <div class="gc-amount-display" id="gcPreviewAmount">$100 CAD</div>
+              <p id="gcPreviewMessage" style="font-style: italic; font-size: 0.88rem; color: var(--text-cream); margin-bottom: 0.75rem;">
+                “Nikmati pengalaman perawatan mewah berkelas di RendezVous Barbershop Toronto.”
+              </p>
+            </div>
+
+            <div class="gc-card-footer-row">
+              <div>
+                <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); letter-spacing: 1px;" id="gcPreviewRecipient">UNTUK: TAMU TERHORMAT</div>
+                <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-subtle); margin-top: 2px;">TANPA KADALUARSA • 5 CABANG TORONTO</div>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--amber-gold); font-weight: 700;">
+                RDV PASS
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RDV Paper (Editorial Journal) -->
+    <section class="py-section paper-section" id="paper">
+      <div class="container">
+        <div class="section-header-centered section-header-reveal">
+          <span class="badge-tag amber">JURNAL & ARTIKEL</span>
+          <h2 class="section-title-huge">RDV <em>Paper</em></h2>
+          <p class="section-subtitle">Wawasan mendalam tentang arsitektur rambut pria, perawatan jenggot, dan gaya hidup modern.</p>
+        </div>
+
+        <div class="paper-grid">
+          <!-- Article 1 -->
+          <div class="paper-card open-article-btn" data-article="fadeVsTaper" data-cursor="BACA">
+            <div class="paper-meta">
+              <span>GAYA & TEKNIK</span>
+              <span>4 MENIT BACA</span>
+            </div>
+            <h3 class="paper-title">Skin Fade vs. Taper: Mana Potongan yang Paling Cocok untuk Wajah Anda?</h3>
+            <p class="paper-excerpt">Bingung memilih antara skin fade atau taper? Master barber Rendezvous mengupas tuntas perbedaan garis potongan, kemudahan perawatan harian, dan kesesuaian bentuk wajah.</p>
+            <div class="paper-read-link">
+              <span>BACA SELENGKAPNYA</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </div>
+          </div>
+
+          <!-- Article 2 -->
+          <div class="paper-card open-article-btn" data-article="scalpTreatment" data-cursor="BACA">
+            <div class="paper-meta">
+              <span>KESEHATAN RAMBUT</span>
+              <span>3 MENIT BACA</span>
+            </div>
+            <h3 class="paper-title">Terapi Kulit Kepala Mendalam: Kunci Menjaga Folikel Rambut Tetap Kuat</h3>
+            <p class="paper-excerpt">Mengapa eksfoliasi kulit kepala sangat penting untuk pria perkotaan? Pelajari bagaimana minyak tea tree dan pijatan titik saraf menjaga rambut tebal dan bebas ketombe.</p>
+            <div class="paper-read-link">
+              <span>BACA SELENGKAPNYA</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </div>
+          </div>
+
+          <!-- Article 3 -->
+          <div class="paper-card open-article-btn" data-article="corporateBeard" data-cursor="BACA">
+            <div class="paper-meta">
+              <span>PERAWATAN JENGGOT</span>
+              <span>5 MENIT BACA</span>
+            </div>
+            <h3 class="paper-title">Panduan Merawat Jenggot Profesional untuk Pria Eksekutif</h3>
+            <p class="paper-excerpt">Cara menumbuhkan dan merapikan jenggot agar terlihat rapi dan elegan di lingkungan bisnis. Aturan geometris garis leher, gradasi panjang, dan hidrasi harian.</p>
+            <div class="paper-read-link">
+              <span>BACA SELENGKAPNYA</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-section faq-section" id="faq">
+      <div class="container">
+        <div class="section-header-centered section-header-reveal">
+          <span class="badge-tag">TANYA JAWAB</span>
+          <h2 class="section-title-huge">Pertanyaan Umum <em>& Kebijakan</em></h2>
+          <p class="section-subtitle">Segala hal yang perlu Anda ketahui mengenai reservasi, fasilitas gratis, dan kebijakan salon kami.</p>
+        </div>
+
+        <div class="faq-wrapper">
+          <!-- FAQ 1 -->
+          <div class="faq-item active">
+            <button class="faq-question">
+              <span>Apakah cuci rambut sudah termasuk dalam harga potong rambut?</span>
+              <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+            </button>
+            <div class="faq-answer">
+              <p>Tentu saja! Jika Anda menginginkannya dan sesuai dengan rekomendasi barber, rambut Anda akan dicuci bersih menggunakan sampo botanikal hangat tanpa biaya tambahan apapun.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Apakah minuman kopi espresso benar-benar gratis?</span>
+              <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+            </button>
+            <div class="faq-answer">
+              <p>Ya, 100% gratis! Espresso Italia segar, cappuccino, teh artisan hangat, air mineral dingin, dan sparkling water disajikan untuk menemani sesi perawatan Anda.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Bagaimana kebijakan pembatalan atau pergantian jadwal reservasi?</span>
+              <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+            </button>
+            <div class="faq-answer">
+              <p>Jika Anda berhalangan hadir, harap membatalkan atau mengubah jadwal setidaknya 6 jam sebelum sesi Anda melalui link konfirmasi atau SMS concierge untuk menghargai waktu master barber yang telah dialokasikan.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Apa itu protokol set alat higienis personal RendezVous?</span>
+              <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+            </button>
+            <div class="faq-answer">
+              <p>Setiap barber menggunakan set gunting, sisir, dan mata pisau yang baru disterilkan secara individual khusus untuk setiap pelanggan demi menjaga standar kebersihan dan higienitas tertinggi.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Apakah voucher hadiah digital memiliki masa kadaluarsa?</span>
+              <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+            </button>
+            <div class="faq-answer">
+              <p>Tidak! Voucher dan Gift Pass RendezVous berlaku selamanya tanpa batas waktu dan dapat digunakan di kelima cabang Toronto untuk semua jenis layanan atau produk perawatan.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       CURTAIN REVEAL FOOTER (FIXED UNDERNEATH WITH DRAMATIC PHOTO REVEAL)
+       ========================================================================== -->
+  <footer class="curtain-reveal-footer" id="curtainFooter">
+    <img src="assets/images/hero.jpg" alt="Suasana Barbershop Mewah RendezVous Toronto" class="footer-curtain-bg" loading="lazy">
+    
+    <div class="footer-curtain-content">
+      <div class="container">
+        
+        <!-- Giant Cinematic Manifesto Heading (Exact Reference Match) -->
+        <div class="footer-statement-block">
+          <h2 class="footer-giant-statement">
+            Meet your best self
+            <span class="statement-italic-line">at Rendezvous</span>
+          </h2>
+        </div>
+
+        <!-- Grid Links & Contact -->
+        <div class="footer-curtain-grid">
+          <!-- Col 1 -->
+          <div>
+            <div class="footer-brand-title">RENDEZVOUS<span style="color: #FF5E1E;">.</span></div>
+            <p class="footer-bio">
+              Destinasi terdepan di Toronto untuk gaya rambut pria modern, presisi skin fade, dan ritual perawatan berkelas. Didirikan tahun 2017.
+            </p>
+            <div class="social-links">
+              <a href="https://www.instagram.com/rendezvous.barbershops/" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a href="https://www.facebook.com/RendezVous.ca" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a href="https://www.linkedin.com/company/rendezvous-holdings" target="_blank" rel="noopener" class="social-btn" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+              <a href="https://www.youtube.com/@RendezvousBarbers/shorts" target="_blank" rel="noopener" class="social-btn" aria-label="YouTube">
+                <i class="fa-brands fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Col 2 -->
+          <div>
+            <h4 class="footer-heading">Navigasi Utama</h4>
+            <ul class="footer-links-list">
+              <li><a href="#hero">Beranda</a></li>
+              <li><a href="#philosophy">Pengalaman & Filosofi</a></li>
+              <li><a href="#services">Layanan & Daftar Harga</a></li>
+              <li><a href="#locations">5 Cabang Toronto</a></li>
+              <li><a href="#team">Tim Master Barber</a></li>
+              <li><a href="#lookbook">Arsip Lookbook</a></li>
+              <li><a href="#giftcards">Voucher Hadiah Digital</a></li>
+              <li><a href="#paper">RDV Paper</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3 -->
+          <div>
+            <h4 class="footer-heading">Cabang di Toronto</h4>
+            <ul class="footer-links-list">
+              <li><a href="#locations">Queen St West (Downtown Core)</a></li>
+              <li><a href="#locations">Scarborough (Cabang Pertama)</a></li>
+              <li><a href="#locations">Yonge & Wellington (Financial Dist)</a></li>
+              <li><a href="#locations">King St & Bathurst (Fashion Dist)</a></li>
+              <li><a href="#locations">Mutual St (Downtown East)</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4 -->
+          <div>
+            <h4 class="footer-heading">Layanan Pelanggan</h4>
+            <ul class="footer-links-list">
+              <li><span class="text-muted">Concierge SMS 24/7:</span><br><a href="tel:+14165962383" class="text-orange">+1 416-596-2383</a></li>
+              <li><span class="text-muted">Informasi Umum:</span><br><a href="mailto:info@myrendezvous.ca">info@myrendezvous.ca</a></li>
+              <li><span class="text-muted">Karir & Rekrutmen:</span><br><a href="mailto:careers@myrendezvous.ca">careers@myrendezvous.ca</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+          <div>© 2026 RendezVous Barbershops Ltd. Hak cipta dilindungi undang-undang.</div>
+          <div style="display: flex; gap: 1.5rem;">
+            <a href="#">Kebijakan Privasi</a>
+            <a href="#">Syarat & Ketentuan</a>
+            <a href="#">Standar Higienis</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       INTERACTIVE MULTI-STEP BOOKING MODAL (BAHASA INDONESIA)
+       ========================================================================== -->
+  <div class="booking-modal-backdrop" id="bookingModal" role="dialog" aria-modal="true">
+    <div class="booking-modal-container">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span class="modal-step-indicator" id="modalStepLabel">LANGKAH 1 DARI 5</span>
+          <h3 class="modal-title">Reservasi Jadwal Cukur</h3>
+        </div>
+        <button class="modal-close-btn" id="closeBookingModal" aria-label="Tutup formulir">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- Step 1: Location -->
+        <div class="booking-step active" id="bookingStep1">
+          <h4 class="font-serif text-cream" style="font-size: 1.3rem; margin-bottom: 0.5rem;">Pilih Cabang Toronto</h4>
+          <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1.5rem;">Pilih lokasi salon RendezVous terdekat dengan Anda:</p>
+
+          <div class="modal-grid-options">
+            <div class="modal-option-card location-option-card selected" data-value="Queen St West (Downtown Core)">
+              <div>
+                <div class="modal-option-title">Queen St West</div>
+                <div class="modal-option-sub">309 Queen St W • Downtown Core</div>
+              </div>
+              <span class="badge-tag" style="margin: 0; padding: 0.2rem 0.6rem; font-size: 0.65rem;">FLAGSHIP</span>
+            </div>
+            <div class="modal-option-card location-option-card" data-value="Scarborough (Cabang Pertama)">
+              <div>
+                <div class="modal-option-title">Scarborough</div>
+                <div class="modal-option-sub">2078 Lawrence Ave E • Parkir Plaza Gratis</div>
+              </div>
+            </div>
+            <div class="modal-option-card location-option-card" data-value="Yonge & Wellington (Financial Dist)">
+              <div>
+                <div class="modal-option-title">Yonge & Wellington</div>
+                <div class="modal-option-sub">33 Yonge St #110 • Kawasan Finansial</div>
+              </div>
+            </div>
+            <div class="modal-option-card location-option-card" data-value="King St & Bathurst (Fashion Dist)">
+              <div>
+                <div class="modal-option-title">King St & Bathurst</div>
+                <div class="modal-option-sub">720 King St W #135 • Kawasan Mode</div>
+              </div>
+            </div>
+            <div class="modal-option-card location-option-card" data-value="Mutual St (Downtown East)">
+              <div>
+                <div class="modal-option-title">Mutual St</div>
+                <div class="modal-option-sub">30 Mutual St #3 • Downtown East</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Barber Selection -->
+        <div class="booking-step" id="bookingStep2">
+          <h4 class="font-serif text-cream" style="font-size: 1.3rem; margin-bottom: 0.5rem;">Pilih Master Barber</h4>
+          <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1.5rem;">Pilih barber pilihan Anda atau barber yang tersedia paling cepat:</p>
+
+          <div class="modal-grid-options">
+            <div class="modal-option-card barber-option-card selected" data-value="Siapa Saja yang Tersedia (Paling Cepat)">
+              <div>
+                <div class="modal-option-title">Siapa Saja yang Tersedia</div>
+                <div class="modal-option-sub">Kursi pertama yang kosong untuk pelayanan tercepat</div>
+              </div>
+              <span class="badge-tag" style="margin: 0; padding: 0.2rem 0.6rem; font-size: 0.65rem;">TERCEPAT</span>
+            </div>
+            <div class="modal-option-card barber-option-card" data-value="Issa (Founder & Master Barber)">
+              <div>
+                <div class="modal-option-title">Issa</div>
+                <div class="modal-option-sub">Pendiri • Spesialis Taper & Textured Crop</div>
+              </div>
+            </div>
+            <div class="modal-option-card barber-option-card" data-value="Stas (Skin Fade Specialist)">
+              <div>
+                <div class="modal-option-title">Stas</div>
+                <div class="modal-option-sub">Spesialis Skin Fade Tajam & Foil Blending</div>
+              </div>
+            </div>
+            <div class="modal-option-card barber-option-card" data-value="Cesar (Beard & Shave Master)">
+              <div>
+                <div class="modal-option-title">Cesar</div>
+                <div class="modal-option-sub">Pakar Cukur Pisau Lipat & Arsitektur Jenggot</div>
+              </div>
+            </div>
+            <div class="modal-option-card barber-option-card" data-value="Hamo (Senior Stylist)">
+              <div>
+                <div class="modal-option-title">Hamo</div>
+                <div class="modal-option-sub">Potongan Gunting Eksekutif & Terapi Relaksasi</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Service & Add-ons -->
+        <div class="booking-step" id="bookingStep3">
+          <h4 class="font-serif text-cream" style="font-size: 1.3rem; margin-bottom: 0.5rem;">Pilih Layanan</h4>
+          <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1.5rem;">Pilih paket perawatan utama dan opsi perawatan tambahan:</p>
+
+          <div class="modal-grid-options" style="margin-bottom: 1.75rem;">
+            <div class="modal-option-card service-option-card selected" data-value="The RendezVous Signature Cut" data-price="48">
+              <div>
+                <div class="modal-option-title">The RendezVous Signature Cut</div>
+                <div class="modal-option-sub">40 menit • Termasuk cuci rambut & styling</div>
+              </div>
+              <div class="modal-option-price">$48</div>
+            </div>
+            <div class="modal-option-card service-option-card" data-value="Skin Fade & Precision Taper" data-price="52">
+              <div>
+                <div class="modal-option-title">Skin Fade & Precision Taper</div>
+                <div class="modal-option-sub">45 menit • Gradasi fade ultra bersih</div>
+              </div>
+              <div class="modal-option-price">$52</div>
+            </div>
+            <div class="modal-option-card service-option-card" data-value="Royal Hot Towel Straight Razor Shave" data-price="42">
+              <div>
+                <div class="modal-option-title">Royal Hot Towel Razor Shave</div>
+                <div class="modal-option-sub">35 menit • Handuk hangat & pisau lipat Jepang</div>
+              </div>
+              <div class="modal-option-price">$42</div>
+            </div>
+            <div class="modal-option-card service-option-card" data-value="Beard Architecture & Razor Lineup" data-price="35">
+              <div>
+                <div class="modal-option-title">Beard Architecture & Lineup</div>
+                <div class="modal-option-sub">30 menit • Pembentukan & minyak sandalwood</div>
+              </div>
+              <div class="modal-option-price">$35</div>
+            </div>
+            <div class="modal-option-card service-option-card" data-value="The Full RendezVous: Cut & Beard Sculpt" data-price="78">
+              <div>
+                <div class="modal-option-title">The Full RendezVous Combo</div>
+                <div class="modal-option-sub">65 menit • Potong Rambut + Bentuk Jenggot</div>
+              </div>
+              <div class="modal-option-price">$78</div>
+            </div>
+          </div>
+
+          <h5 class="text-cream" style="font-size: 0.95rem; margin-bottom: 0.75rem;">Opsi Perawatan Tambahan:</h5>
+          <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+            <label style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; color: #F7F3EA; cursor: pointer;">
+              <input type="checkbox" class="addon-checkbox" data-addon="Detox Kulit Kepala Tea Tree" data-price="20" style="accent-color: #FF5E1E; width: 18px; height: 18px;">
+              <span>Detox Kulit Kepala Organik Tea Tree & Peppermint (+ $20)</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; color: #F7F3EA; cursor: pointer;">
+              <input type="checkbox" class="addon-checkbox" data-addon="Masker Arang Pembersih Pori" data-price="15" style="accent-color: #FF5E1E; width: 18px; height: 18px;">
+              <span>Masker Wajah Arang Pembersih Komedo (+ $15)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Step 4: Date, Time & Client Info -->
+        <div class="booking-step" id="bookingStep4">
+          <h4 class="font-serif text-cream" style="font-size: 1.3rem; margin-bottom: 0.5rem;">Pilih Tanggal & Waktu</h4>
+          <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1.25rem;">Tentukan jam kunjungan dan isi data diri Anda:</p>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+            <div>
+              <label class="text-muted" style="font-size: 0.8rem; display: block; margin-bottom: 0.35rem;">TANGGAL RESERVASI</label>
+              <input type="date" class="booking-form-input" id="bookingDateInput">
+            </div>
+            <div>
+              <label class="text-muted" style="font-size: 0.8rem; display: block; margin-bottom: 0.35rem;">NAMA LENGKAP</label>
+              <input type="text" class="booking-form-input" id="clientNameInput" placeholder="Alexander Wright">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+            <div>
+              <label class="text-muted" style="font-size: 0.8rem; display: block; margin-bottom: 0.35rem;">NOMOR WHATSAPP / HP</label>
+              <input type="tel" class="booking-form-input" id="clientPhoneInput" placeholder="+62 812 3456 7890">
+            </div>
+            <div>
+              <label class="text-muted" style="font-size: 0.8rem; display: block; margin-bottom: 0.35rem;">ALAMAT EMAIL</label>
+              <input type="email" class="booking-form-input" id="clientEmailInput" placeholder="alexander@example.com">
+            </div>
+          </div>
+
+          <label class="text-muted" style="font-size: 0.8rem; display: block; margin-bottom: 0.35rem;">PILIHAN JAM KUNJUNGAN</label>
+          <div class="time-slots-grid">
+            <button class="time-slot-btn">09:00</button>
+            <button class="time-slot-btn">10:00</button>
+            <button class="time-slot-btn">10:45</button>
+            <button class="time-slot-btn selected">11:30</button>
+            <button class="time-slot-btn">13:15</button>
+            <button class="time-slot-btn">14:00</button>
+            <button class="time-slot-btn">15:30</button>
+            <button class="time-slot-btn">16:15</button>
+            <button class="time-slot-btn">17:00</button>
+            <button class="time-slot-btn">18:30</button>
+          </div>
+        </div>
+
+        <!-- Step 5: Review & Confirmation -->
+        <div class="booking-step" id="bookingStep5">
+          <h4 class="font-serif text-cream" style="font-size: 1.3rem; margin-bottom: 0.5rem;">Konfirmasi Detail Reservasi</h4>
+          <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1.5rem;">Silakan periksa detail pesanan Anda sebelum mengonfirmasi. Pembayaran dilakukan di tempat setelah selesai cukur.</p>
+
+          <div id="bookingSummaryContainer">
+            <!-- Dynamically populated via JS -->
+          </div>
+
+          <div style="background: rgba(255,94,30,0.08); border: 1px solid rgba(255,94,30,0.25); border-radius: 12px; padding: 1rem; font-size: 0.85rem; color: #F7F3EA;">
+            <i class="fa-solid fa-circle-info text-orange" style="margin-right: 0.4rem;"></i>
+            <strong>Tanpa Uang Muka:</strong> Pembayaran dapat dilakukan dengan Kartu Debit/Kredit, QRIS, atau Tunai di kasir salon.
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer Navigation -->
+      <div class="modal-footer">
+        <button class="btn-secondary" id="bookingPrevBtn" style="display: none;">
+          <i class="fa-solid fa-arrow-left"></i> KEMBALI
+        </button>
+        <button class="btn-primary" id="bookingNextBtn">
+          LANGKAH BERIKUTNYA <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <button class="btn-primary" id="bookingConfirmBtn" style="display: none;">
+          <i class="fa-solid fa-check"></i> KONFIRMASI JADWAL
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RDV Paper Article Reader Modal -->
+  <div class="article-modal-backdrop" id="articleModal" role="dialog" aria-modal="true">
+    <div class="article-modal-container">
+      <button class="modal-close-btn" id="closeArticleModal" style="position: absolute; top: 1.5rem; right: 1.5rem;" aria-label="Tutup artikel">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="articleModalMeta" style="margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--orange-primary);"></div>
+      <h2 id="articleModalTitle" class="font-serif text-cream" style="font-size: 2rem; line-height: 1.25; margin-bottom: 1.5rem;"></h2>
+      <div id="articleModalBody" class="text-muted" style="line-height: 1.75; font-size: 1.02rem;"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript Dependencies -->
+  <script src="scripts/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+
+  <!-- Project Scripts -->
+  <script src="scripts/sound.js"></script>
+  <script src="scripts/scissors3d.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>
