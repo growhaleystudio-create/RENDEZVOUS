@@ -99,7 +99,7 @@ export default function ScissorsCanvas3D() {
       '/models/scissors.glb',
       (gltf) => {
         const root = gltf.scene;
-        const scScale = isMobile ? 4.6 : 5.4;
+        const scScale = isMobile ? 2.8 : 5.4;
         root.scale.set(scScale, scScale, scScale);
 
         const scissorsMaterial = new THREE.MeshStandardMaterial({
@@ -130,7 +130,7 @@ export default function ScissorsCanvas3D() {
       '/models/lowpoly_sharp_comb.glb',
       (gltf) => {
         const root = gltf.scene;
-        const cbScale = isMobile ? 0.54 : 0.62;
+        const cbScale = isMobile ? 0.32 : 0.62;
         root.scale.set(cbScale, cbScale, cbScale);
 
         const combMaterial = new THREE.MeshStandardMaterial({

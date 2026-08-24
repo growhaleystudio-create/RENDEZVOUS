@@ -3345,9 +3345,54 @@ button,
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  padding-top: 2rem;
-  margin-top: 2rem;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
   border-top: 1px solid var(--border-light);
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .booking-modal-container {
+    padding: 1.35rem 1.15rem !important;
+    border-radius: 20px !important;
+    max-height: 88vh !important;
+  }
+  .modal-header {
+    margin-bottom: 1.25rem !important;
+    padding-bottom: 1rem !important;
+  }
+  .modal-title {
+    font-size: 1.35rem !important;
+  }
+  .modal-footer {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0.75rem !important;
+    padding: 1rem 0 0 !important;
+    margin-top: 1.25rem !important;
+    width: 100% !important;
+  }
+  .modal-footer .btn-primary,
+  .modal-footer .btn-secondary {
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    padding: 0.8rem 0.5rem !important;
+    font-size: 0.8rem !important;
+    border-radius: 100px !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  .modal-footer .btn-primary span,
+  .modal-footer .btn-secondary span {
+    white-space: nowrap !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.5px !important;
+  }
 }
 
 /* Booking Receipt & Confirmation */
