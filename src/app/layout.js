@@ -1,14 +1,15 @@
 import './globals.css';
 import CustomCursor from '@/components/CustomCursor';
 import ScissorsCanvas3D from '@/components/ScissorsCanvas3D';
+import ScrollRevealProvider from '@/components/ScrollRevealProvider';
 
 export const metadata = {
-  title: 'RENDEZVOUS BARBERSHOP — Barbershop Mewah & Spesialis Gaya Rambut Modern di Toronto',
-  description: 'Ambiens mewah yang konsisten, standar sterilisasi alat medis, dan master barber di 5 cabang Toronto. Sediakan waktu untuk diri Anda.',
-  keywords: 'barbershop toronto, rendezvous barbers, luxury haircut toronto, skin fade toronto, straight razor shave',
+  title: 'RENDEZVOUS — Barbershop Mewah & Spesialis Gaya Rambut Modern di Indonesia',
+  description: 'Ambiens mewah yang konsisten, standar sterilisasi alat medis, dan master barber di 5 cabang Indonesia. Sediakan waktu untuk diri Anda.',
+  keywords: 'barbershop indonesia, barbershop jakarta, rendezvous barbers, luxury haircut, skin fade, straight razor shave',
   openGraph: {
-    title: 'RENDEZVOUS BARBERSHOP — Toronto Luxury Grooming Haven',
-    description: 'Ambiens mewah yang konsisten, standar sterilisasi alat medis, dan master barber di 5 cabang Toronto.',
+    title: 'RENDEZVOUS — Indonesian Luxury Grooming Haven',
+    description: 'Ambiens mewah yang konsisten, standar sterilisasi alat medis, dan master barber di 5 cabang Indonesia.',
     images: ['/images/hero.jpg'],
   },
 };
@@ -32,7 +33,9 @@ export default function RootLayout({ children }) {
       <body>
         <CustomCursor />
         <ScissorsCanvas3D />
-        {children}
+        <ScrollRevealProvider>
+          {children}
+        </ScrollRevealProvider>
       </body>
     </html>
   );
