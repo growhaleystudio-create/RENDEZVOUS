@@ -70,31 +70,33 @@ export default function GiftCards() {
         <div className="giftcard-portal-grid">
           {/* Form Controls */}
           <div className="gc-control-box">
-            <h3 className="font-serif text-cream" style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
+            <h3 className="font-serif text-cream gc-heading">
               Kustomisasi Voucher Hadiah
             </h3>
-            <p className="text-muted" style={{ fontSize: '0.88rem', marginBottom: '1.5rem' }}>
+            <p className="text-muted gc-subheading">
               Pilih nominal dan sesuaikan pesan khusus secara real-time:
             </p>
 
-            <label className="text-muted" style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: '0.4rem' }}>
-              PILIH NOMINAL VOUCHER (IDR)
-            </label>
-            <div className="gc-amount-presets">
-              {presets.map((item) => (
-                <button
-                  key={item.val}
-                  type="button"
-                  className={`gc-amount-btn ${amount === item.val && !customAmount ? 'selected' : ''}`}
-                  onClick={() => handleSelectAmount(item.val)}
-                >
-                  {item.label}
-                </button>
-              ))}
+            <div className="gc-form-group">
+              <label className="gc-input-label">
+                PILIH NOMINAL VOUCHER (IDR)
+              </label>
+              <div className="gc-amount-presets">
+                {presets.map((item) => (
+                  <button
+                    key={item.val}
+                    type="button"
+                    className={`gc-amount-btn ${amount === item.val && !customAmount ? 'selected' : ''}`}
+                    onClick={() => handleSelectAmount(item.val)}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            <div style={{ marginBottom: '1.25rem' }}>
-              <label className="text-muted" style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: '0.4rem' }}>
+            <div className="gc-form-group">
+              <label className="gc-input-label">
                 NOMINAL LAIN (Rp)
               </label>
               <input
@@ -103,12 +105,12 @@ export default function GiftCards() {
                 id="gcCustomAmount"
                 value={customAmount}
                 onChange={handleCustomAmountChange}
-                placeholder="Atau masukkan nominal kustom (misal: 350000)"
+                placeholder="Atau masukkan nominal kustom"
               />
             </div>
 
-            <div style={{ marginBottom: '1.25rem' }}>
-              <label className="text-muted" style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: '0.4rem' }}>
+            <div className="gc-form-group">
+              <label className="gc-input-label">
                 NAMA LENGKAP PENERIMA
               </label>
               <input
@@ -121,8 +123,8 @@ export default function GiftCards() {
               />
             </div>
 
-            <div style={{ marginBottom: '1.75rem' }}>
-              <label className="text-muted" style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: '0.4rem' }}>
+            <div className="gc-form-group gc-form-group-last">
+              <label className="gc-input-label">
                 PESAN KHUSUS / UCAPAN
               </label>
               <input
@@ -137,7 +139,7 @@ export default function GiftCards() {
 
             <button
               type="button"
-              className="btn-primary"
+              className="btn-primary gc-submit-btn"
               id="gcIssueBtn"
               style={{ width: '100%' }}
               onClick={handleIssueGiftCard}
@@ -148,15 +150,7 @@ export default function GiftCards() {
             {isSuccess && (
               <div
                 id="gcSuccessNotice"
-                style={{
-                  marginTop: '1rem',
-                  padding: '0.9rem',
-                  background: 'rgba(34,197,94,0.12)',
-                  border: '1px solid rgba(34,197,94,0.3)',
-                  borderRadius: '12px',
-                  fontSize: '0.85rem',
-                  color: '#4ADE80',
-                }}
+                className="gc-success-alert"
               >
                 <i className="fa-solid fa-circle-check"></i> Voucher Hadiah Digital Berhasil Dibuat! Tunjukkan kode{' '}
                 <strong>#RDV-GIFT-2026</strong> saat pembayaran di kasir cabang manapun.
@@ -167,36 +161,36 @@ export default function GiftCards() {
           {/* Live Visual Preview Card */}
           <div className="gc-visual-preview-card">
             <div className="gc-card-brand-row">
-              <div>
+              <div className="gc-card-brand-col">
                 <div className="gc-brand-text">
                   RENDEZVOUS<span className="text-orange">.</span>
                 </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--orange-primary)', letterSpacing: '2px' }}>
+                <div className="gc-brand-tagline">
                   INDONESIA GROOMING HAVEN
                 </div>
               </div>
               <div className="gc-chip-icon"></div>
             </div>
 
-            <div>
+            <div className="gc-card-body">
               <div className="gc-amount-display" id="gcPreviewAmount">
                 {displayAmount}
               </div>
-              <p id="gcPreviewMessage" style={{ fontStyle: 'italic', fontSize: '0.88rem', color: 'var(--text-cream)', marginBottom: '0.75rem' }}>
+              <p id="gcPreviewMessage" className="gc-preview-message">
                 {displayMessage}
               </p>
             </div>
 
             <div className="gc-card-footer-row">
-              <div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-muted)', letterSpacing: '1px' }} id="gcPreviewRecipient">
+              <div className="gc-recipient-info">
+                <div className="gc-recipient-label" id="gcPreviewRecipient">
                   UNTUK: {displayRecipient}
                 </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--text-subtle)', marginTop: '2px' }}>
+                <div className="gc-recipient-sub">
                   TANPA KADALUARSA • 5 CABANG INDONESIA
                 </div>
               </div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--amber-gold)', fontWeight: 700 }}>
+              <div className="gc-pass-badge">
                 RDV PASS
               </div>
             </div>

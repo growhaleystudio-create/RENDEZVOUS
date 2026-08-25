@@ -3019,6 +3019,7 @@ button,
 .giftcard-section {
   background: transparent;
   border-top: 1px solid var(--border-light);
+  overflow: hidden;
 }
 
 .giftcard-portal-grid {
@@ -3026,12 +3027,8 @@ button,
   grid-template-columns: 1.1fr 0.9fr;
   gap: 3.5rem;
   align-items: center;
-}
-
-@media (max-width: 1024px) {
-  .giftcard-portal-grid {
-    grid-template-columns: 1fr;
-  }
+  width: 100%;
+  max-width: 100%;
 }
 
 .gc-control-box {
@@ -3042,6 +3039,36 @@ button,
   box-shadow: var(--shadow-warm);
   box-sizing: border-box;
   width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.gc-heading {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.gc-subheading {
+  font-size: 0.88rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.gc-form-group {
+  margin-bottom: 1.25rem;
+  width: 100%;
+}
+
+.gc-form-group-last {
+  margin-bottom: 1.75rem;
+}
+
+.gc-input-label {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--text-muted);
 }
 
 .gc-amount-grid,
@@ -3051,7 +3078,7 @@ button,
   gap: 0.5rem;
   width: 100%;
   box-sizing: border-box;
-  margin: 1.25rem 0 1.5rem;
+  margin: 0.5rem 0 0;
 }
 
 .gc-amount-btn {
@@ -3072,6 +3099,7 @@ button,
   display: flex;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
 }
 
 .gc-amount-btn:hover {
@@ -3088,13 +3116,14 @@ button,
 
 .gc-form-input {
   width: 100%;
+  max-width: 100%;
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid var(--border-medium);
   border-radius: 10px;
   padding: 0.85rem 1rem;
   color: #fff;
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   margin-top: 0.4rem;
   outline: none;
   transition: border-color var(--transition-fast);
@@ -3103,6 +3132,24 @@ button,
 
 .gc-form-input:focus {
   border-color: var(--orange-primary);
+}
+
+.gc-submit-btn {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.gc-success-alert {
+  margin-top: 1rem;
+  padding: 0.9rem;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  color: #4ADE80;
+  line-height: 1.5;
+  word-break: break-word;
 }
 
 /* Luxury Embossed Gift Card Visual */
@@ -3119,12 +3166,16 @@ button,
   justify-content: space-between;
   box-sizing: border-box;
   width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .gc-card-brand-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
 }
 
 .gc-brand-text {
@@ -3133,23 +3184,49 @@ button,
   font-weight: 900;
   letter-spacing: 2px;
   color: var(--text-white);
+  line-height: 1.2;
+}
+
+.gc-brand-tagline {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--orange-primary);
+  letter-spacing: 2px;
+  margin-top: 2px;
 }
 
 .gc-chip-icon {
   width: 44px;
   height: 32px;
+  flex-shrink: 0;
   border-radius: 6px;
   background: linear-gradient(135deg, #D4AF37, #F3E5AB, #AA771C);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.gc-card-body {
+  margin: 1rem 0;
 }
 
 .gc-amount-display {
   font-family: var(--font-mono);
-  font-size: 2.5rem;
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
   font-weight: 800;
   color: var(--orange-vibrant);
-  margin: 1.5rem 0;
+  margin-bottom: 0.75rem;
   text-shadow: 0 0 20px var(--orange-glow);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  line-height: 1.15;
+}
+
+.gc-preview-message {
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--text-cream);
+  line-height: 1.5;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .gc-card-footer-row {
@@ -3158,6 +3235,134 @@ button,
   align-items: flex-end;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 1.25rem;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.gc-recipient-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.gc-recipient-sub {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-subtle);
+  margin-top: 2px;
+}
+
+.gc-pass-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--amber-gold);
+  font-weight: 700;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Responsive Gift Card Portal */
+@media (max-width: 1024px) {
+  .giftcard-portal-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .giftcard-portal-grid {
+    gap: 2rem;
+  }
+
+  .gc-control-box {
+    padding: 1.75rem 1.25rem;
+    border-radius: 20px;
+  }
+
+  .gc-visual-preview-card {
+    padding: 1.75rem 1.25rem;
+    border-radius: 20px;
+    min-height: auto;
+  }
+
+  .gc-amount-presets {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+
+  .gc-amount-btn {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .gc-heading {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .giftcard-portal-grid {
+    gap: 1.5rem;
+  }
+
+  .gc-control-box {
+    padding: 1.25rem 1rem;
+    border-radius: 16px;
+  }
+
+  .gc-visual-preview-card {
+    padding: 1.25rem 1rem;
+    border-radius: 16px;
+  }
+
+  .gc-brand-text {
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+  }
+
+  .gc-brand-tagline {
+    font-size: 0.55rem;
+    letter-spacing: 1px;
+  }
+
+  .gc-chip-icon {
+    width: 36px;
+    height: 26px;
+  }
+
+  .gc-amount-display {
+    font-size: clamp(1.4rem, 6.5vw, 1.85rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .gc-preview-message {
+    font-size: 0.8rem;
+  }
+
+  .gc-card-footer-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding-top: 1rem;
+  }
+
+  .gc-pass-badge {
+    align-self: flex-start;
+  }
+
+  .gc-submit-btn,
+  .btn-primary#gcIssueBtn,
+  #gcIssueBtn {
+    padding: 0.85rem 1rem !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 0px !important;
+    white-space: normal !important;
+    text-align: center;
+    line-height: 1.35;
+  }
 }
 
 /* --- FAQ Accordion --- */
