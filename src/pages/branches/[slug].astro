@@ -1,0 +1,38 @@
+---
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import EditorialButton from "../../components/EditorialButton.astro";
+import PrototypeLink from "../../components/PrototypeLink.astro";
+import { branches, services } from "../../data/demo-content.js";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+export function getStaticPaths() {
+	return branches.map((branch) => ({ params: { slug: branch.slug }, props: { branch } }));
+}
+
+const { branch } = Astro.props;
+const availableServices = services.filter((service) => branch.serviceIds.includes(service.id));
+---
+
+<SiteLayout title={`${branch.name} — Rendezvous`}>
+	<main class="page-view">
+		<div class="editorial-shell">
+			<Breadcrumb items={[{ label: "Beranda", href: "/" }, { label: "Cabang", href: "/branches/" }, { label: branch.name }]} />
+			<article class="detail-page">
+				<div class="detail-page__copy">
+					<p class="section-heading__eyebrow">{branch.city}</p>
+					<h1>{branch.name}</h1>
+					<div class="detail-meta detail-meta--stacked">
+						<span>{branch.address}</span>
+						<span>{branch.hours}</span>
+						<span>{branch.phone}</span>
+					</div>
+					<EditorialButton href={`/booking/?branch=${branch.id}`} label="Booking di cabang ini" />
+				</div>
+				<div class="detail-page__aside">
+					<h2>Layanan</h2>
+					<ul>{availableServices.map((service) => <li><PrototypeLink href={`/services/${service.slug}/`}>{service.name}</PrototypeLink></li>)}</ul>
+				</div>
+			</article>
+		</div>
+	</main>
+</SiteLayout>

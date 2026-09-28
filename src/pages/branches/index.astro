@@ -1,0 +1,19 @@
+---
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import BranchDrawerList from "../../components/BranchDrawerList.astro";
+import { branches } from "../../data/demo-content.js";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+
+<SiteLayout title="Cabang — Rendezvous">
+	<main class="page-view">
+		<div class="editorial-shell">
+			<Breadcrumb items={[{ label: "Beranda", href: "/" }, { label: "Cabang" }]} />
+			<header class="page-heading">
+				<h1>Cabang</h1>
+				<p>Pilih lokasi cabang yang ingin kamu kunjungi.</p>
+			</header>
+			<BranchDrawerList branches={branches} headingLevel="h2" />
+		</div>
+	</main>
+</SiteLayout>

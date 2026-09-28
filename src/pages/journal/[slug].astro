@@ -1,0 +1,28 @@
+---
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import EditorialButton from "../../components/EditorialButton.astro";
+import { articles } from "../../data/demo-content.js";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+export function getStaticPaths() {
+	return articles.map((article) => ({ params: { slug: article.slug }, props: { article } }));
+}
+
+const { article } = Astro.props;
+---
+
+<SiteLayout title={`${article.title} — Jurnal Rendezvous`}>
+	<main class="page-view">
+		<div class="editorial-shell">
+			<Breadcrumb items={[{ label: "Beranda", href: "/" }, { label: "Jurnal", href: "/journal/" }, { label: article.title }]} />
+			<article class="journal-detail">
+				<p class="section-heading__eyebrow">{article.category}</p>
+				<h1>{article.title}</h1>
+				<p class="journal-detail__excerpt">{article.excerpt}</p>
+				<img src={article.image} alt={article.imageAlt} />
+				<p>{article.body}</p>
+				<EditorialButton href="/booking/" label="Booking sekarang" />
+			</article>
+		</div>
+	</main>
+</SiteLayout>

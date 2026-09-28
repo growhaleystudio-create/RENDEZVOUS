@@ -1,0 +1,39 @@
+---
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import EditorialButton from "../../components/EditorialButton.astro";
+import { services } from "../../data/demo-content.js";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+export function getStaticPaths() {
+	return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+
+const { service } = Astro.props;
+const price = new Intl.NumberFormat("id-ID", {
+	style: "currency",
+	currency: "IDR",
+	maximumFractionDigits: 0,
+});
+---
+
+<SiteLayout title={`${service.name} — Rendezvous`}>
+	<main class="page-view">
+		<div class="editorial-shell">
+			<Breadcrumb items={[{ label: "Beranda", href: "/" }, { label: "Layanan", href: "/services/" }, { label: service.name }]} />
+			<article class="detail-page">
+				<div class="detail-page__copy">
+					<h1>{service.name}</h1>
+					<p class="detail-page__intro">{service.description}</p>
+					<div class="detail-meta">
+						<strong>{price.format(service.price)}</strong>
+					</div>
+					<EditorialButton href={`/booking/?service=${service.id}`} label="Pilih layanan ini" />
+				</div>
+				<div class="detail-page__aside">
+					<h2>Termasuk</h2>
+					<ul>{service.benefits.map((benefit) => <li>{benefit}</li>)}</ul>
+				</div>
+			</article>
+		</div>
+	</main>
+</SiteLayout>

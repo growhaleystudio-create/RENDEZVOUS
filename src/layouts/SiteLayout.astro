@@ -1,0 +1,45 @@
+---
+import "../styles/global.css";
+import "../styles/campaign.css";
+import "../styles/branch-drawer.css";
+import "../styles/promo.css";
+import "../styles/type.css";
+import "../styles/motion.css";
+import SiteNavigation from "../components/SiteNavigation";
+import SiteFooter from "../components/SiteFooter.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Rendezvous — Your next good hair day",
+  description = "Kenali layanan, barber, dan cabang Rendezvous di Jakarta, Bandung, Bali, dan Surabaya.",
+} = Astro.props;
+const bookingUrl = import.meta.env.PUBLIC_BOOKING_URL ?? "/booking/";
+const sectionPrefix = Astro.url.pathname === "/" ? "" : "/";
+---
+
+<!doctype html>
+<html lang="id">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#f8f7f3" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Anton&family=Geist:wght@300..700&display=swap"
+			rel="stylesheet"
+		/>
+		<title>{title}</title>
+	</head>
+	<body>
+		<SiteNavigation client:load bookingUrl={bookingUrl} sectionPrefix={sectionPrefix} />
+		<slot />
+		<SiteFooter />
+	</body>
+</html>

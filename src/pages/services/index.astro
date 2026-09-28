@@ -1,0 +1,41 @@
+---
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import EditorialButton from "../../components/EditorialButton.astro";
+import EditorialLink from "../../components/EditorialLink.astro";
+import { services } from "../../data/demo-content.js";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+const price = new Intl.NumberFormat("id-ID", {
+	style: "currency",
+	currency: "IDR",
+	maximumFractionDigits: 0,
+});
+---
+
+<SiteLayout title="Layanan — Rendezvous">
+	<main class="page-view">
+		<div class="editorial-shell">
+			<Breadcrumb items={[{ label: "Beranda", href: "/" }, { label: "Layanan" }]} />
+			<header class="page-heading">
+				<h1>Layanan</h1>
+				<p>Harga sudah termasuk konsultasi singkat.</p>
+			</header>
+			<ol class="service-list">
+				{services.map((service, index) => (
+					<li class="service-row">
+						<span class="service-row__index">0{index + 1}</span>
+						<div class="service-row__main">
+							<h2>{service.name}</h2>
+							<p>{service.description}</p>
+						</div>
+						<div class="service-row__meta">
+							<strong>{price.format(service.price)}</strong>
+						</div>
+						<EditorialLink href={`/services/${service.slug}/`} label="Detail" ariaLabel={`Lihat detail ${service.name}`} />
+					</li>
+				))}
+			</ol>
+			<EditorialButton href="/booking/" label="Booking sekarang" />
+		</div>
+	</main>
+</SiteLayout>

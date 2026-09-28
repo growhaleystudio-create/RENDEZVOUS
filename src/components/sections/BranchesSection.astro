@@ -1,0 +1,21 @@
+---
+import { branches } from "../../data/demo-content.js";
+import BranchDrawerList from "../BranchDrawerList.astro";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section id="branches" class="editorial-section branches-section" aria-labelledby="branches-heading">
+	<div class="editorial-shell">
+		<SectionHeading
+			sectionId="branches"
+			index="03"
+			eyebrow="Cabang"
+			title="A place to rendezvous."
+			description="Temukan cabang Rendezvous di Jakarta, Bandung, Bali, dan Surabaya."
+		/>
+		<figure class="campaign-space-photo">
+			<img src="/images/photography/interior-brick-studio.webp" alt="Dua kursi barber hitam di ruang kerja berdinding bata." width="1800" height="1200" loading="lazy" />
+		</figure>
+		<BranchDrawerList branches={branches} showBooking={false} />
+	</div>
+</section>

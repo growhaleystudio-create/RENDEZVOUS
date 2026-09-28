@@ -1,0 +1,30 @@
+---
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import PrototypeLink from "../../components/PrototypeLink.astro";
+import { barbers, branches } from "../../data/demo-content.js";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+
+<SiteLayout title="Barber — Rendezvous">
+	<main class="page-view">
+		<div class="editorial-shell">
+			<Breadcrumb items={[{ label: "Beranda", href: "/" }, { label: "Barber" }]} />
+			<header class="page-heading">
+				<h1>Barber</h1>
+			</header>
+			<ul class="barber-grid">
+				{barbers.map((barber, index) => (
+					<li class="barber-entry">
+						<PrototypeLink as="div" class="barber-entry__image" href={`/barbers/${barber.slug}/`}>
+							<img src={barber.image} alt={barber.imageAlt} loading="lazy" />
+							<span>0{index + 1}</span>
+						</PrototypeLink>
+						<div class="barber-entry__heading"><h2><PrototypeLink href={`/barbers/${barber.slug}/`}>{barber.name}</PrototypeLink></h2></div>
+						<p class="barber-entry__meta">{barber.specialties.join(" · ")}</p>
+						<p class="barber-entry__meta">{barber.branchIds.map((id) => branches.find((branch) => branch.id === id)?.name).join(", ")}</p>
+					</li>
+				))}
+			</ul>
+		</div>
+	</main>
+</SiteLayout>

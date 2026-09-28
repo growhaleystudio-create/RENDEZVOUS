@@ -1,0 +1,32 @@
+---
+import { testimonials } from "../../data/demo-content.js";
+import { AsteriskIcon } from "@phosphor-icons/react/dist/ssr/Asterisk";
+import EditorialRailHeading from "../EditorialRailHeading.astro";
+
+const publishedCount = testimonials.published ? testimonials.items.length : 0;
+---
+
+<section id="testimonials" class="editorial-section testimonials-section" aria-labelledby="testimonials-heading">
+	<div class="editorial-shell">
+		<EditorialRailHeading
+			sectionId="testimonials"
+			index="07"
+			eyebrow="Ulasan"
+			title="Stories, when they are ready."
+			description="Kami hanya membagikan pengalaman pelanggan yang sudah mendapat izin untuk diterbitkan."
+			ctaHref="/booking/"
+			ctaLabel="Booking sekarang"
+		/>
+		<div class="testimonials-pending" role="note">
+			<AsteriskIcon className="testimonials-pending__mark" size={30} weight="regular" aria-hidden="true" />
+			<div>
+				<p class="testimonials-pending__eyebrow">Ruang untuk cerita asli</p>
+				<p class="testimonials-pending__message">{testimonials.notice}</p>
+			</div>
+			<div class="testimonials-pending__count" aria-label={`${publishedCount} ulasan diterbitkan`}>
+				<span>{publishedCount}</span>
+				<span>ulasan tayang</span>
+			</div>
+		</div>
+	</div>
+</section>

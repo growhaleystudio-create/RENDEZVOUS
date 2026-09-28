@@ -1,0 +1,30 @@
+---
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import PrototypeLink from "../../components/PrototypeLink.astro";
+import { articles } from "../../data/demo-content.js";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+
+<SiteLayout title="Jurnal — Rendezvous">
+	<main class="page-view">
+		<div class="editorial-shell">
+			<Breadcrumb items={[{ label: "Beranda", href: "/" }, { label: "Jurnal" }]} />
+			<header class="page-heading">
+				<h1>Jurnal</h1>
+				<p>Catatan singkat soal rambut dan perawatannya.</p>
+			</header>
+			<div class="article-grid">
+				{articles.map((article, index) => (
+					<article class="article-entry">
+						<PrototypeLink as="div" href={`/journal/${article.slug}/`} class="article-entry__image">
+							<img src={article.image} alt={article.imageAlt} loading="lazy" />
+						</PrototypeLink>
+						<p class="article-entry__meta">0{index + 1} / {article.category}</p>
+						<h2><PrototypeLink href={`/journal/${article.slug}/`}>{article.title}</PrototypeLink></h2>
+						<p>{article.excerpt}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</main>
+</SiteLayout>

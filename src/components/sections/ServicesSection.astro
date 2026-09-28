@@ -1,0 +1,49 @@
+---
+import { services } from "../../data/demo-content.js";
+import EditorialLink from "../EditorialLink.astro";
+import PrototypeLink from "../PrototypeLink.astro";
+import { ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr/ArrowUpRight";
+
+const price = new Intl.NumberFormat("id-ID", {
+	style: "currency",
+	currency: "IDR",
+	maximumFractionDigits: 0,
+});
+---
+
+<section id="services" class="campaign-services" aria-labelledby="services-heading">
+  <div class="editorial-shell">
+    <div class="campaign-services__header">
+      <p class="campaign-kicker">(02) Layanan barber<br />Rendezvous</p>
+      <h2 id="services-heading">Potong. Cukur. Rawat.</h2>
+      <p class="campaign-services__intro">Pilih layanan potong rambut atau perawatan sesuai kebutuhanmu.</p>
+    </div>
+
+    <ol class="campaign-service-grid">
+      {services.map((service, index) => (
+        <li class="campaign-service-pair">
+          <article class="campaign-service-card">
+            <div class="campaign-service-card__top">
+              <span class="campaign-service-card__number">/{String(index + 1).padStart(2, "0")}</span>
+            </div>
+            <div class="campaign-service-card__body">
+              <p class="campaign-service-card__package">{service.name}</p>
+              <h3><PrototypeLink href={`/services/${service.slug}/`}>{service.showcaseTitle}</PrototypeLink></h3>
+              <p class="campaign-service-card__description">{service.showcaseCopy}</p>
+            </div>
+            <p class="campaign-service-card__meta">{price.format(service.price)}</p>
+          </article>
+          <PrototypeLink as="div" class="campaign-service-pair__photo" href={`/services/${service.slug}/`} ariaLabel={`Detail ${service.name}`}>
+            <img src={`/images/photography/${service.showcaseImage}`} alt={service.showcaseAlt} width={service.showcaseWidth} height={service.showcaseHeight} loading="lazy" />
+            <span class="campaign-service-pair__arrow" aria-hidden="true"><ArrowUpRightIcon size={18} weight="regular" /></span>
+          </PrototypeLink>
+        </li>
+      ))}
+    </ol>
+
+    <div class="campaign-services__footer">
+      <span>{services.length} layanan tersedia.</span>
+      <EditorialLink href="/services/" label="Lihat daftar layanan" />
+    </div>
+  </div>
+</section>

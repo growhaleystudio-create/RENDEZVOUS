@@ -1,0 +1,55 @@
+---
+import { barbers } from "../../data/demo-content.js";
+import BarberSignature from "../BarberSignature.astro";
+import EditorialLink from "../EditorialLink.astro";
+import PrototypeLink from "../PrototypeLink.astro";
+
+const featuredBarbers = barbers.slice(0, 4);
+---
+
+<section id="barbers" class="editorial-section barbers-section" aria-labelledby="barbers-heading">
+	<div class="editorial-shell">
+		<header class="barbers-showcase-header">
+			<div class="barbers-showcase-header__title-wrap">
+				<p class="barbers-showcase-header__eyebrow">(04) Barber kami</p>
+				<h2 id="barbers-heading">In good hands.</h2>
+			</div>
+		</header>
+
+		<ul class="barber-grid barber-showcase-grid" tabindex="0" aria-label="Pilihan barber">
+			{featuredBarbers.map((barber) => (
+				<li class="barber-entry">
+					<PrototypeLink as="div" class="barber-entry__image" href={`/barbers/${barber.slug}/`} ariaLabel={`Profil ${barber.name}`}>
+						<img
+							src={barber.image}
+							alt={barber.imageAlt}
+							width="1122"
+							height="1402"
+							loading="lazy"
+						/>
+						<BarberSignature paths={barber.signaturePaths} />
+					</PrototypeLink>
+					<div class="barber-entry__heading">
+						<h3><PrototypeLink href={`/barbers/${barber.slug}/`}>{barber.name}</PrototypeLink></h3>
+						<p>{barber.specialties.join(" · ")}</p>
+					</div>
+				</li>
+			))}
+		</ul>
+
+		<footer class="barbers-showcase-footer">
+			<EditorialLink href="/barbers/" label={`Kenali semua ${barbers.length} barber`} />
+		</footer>
+	</div>
+</section>
+
+<script>
+	import { observeBarberSignatures } from "../../scripts/barber-signature-reveal.js";
+
+	const section = document.querySelector("#barbers");
+	if (section) {
+		observeBarberSignatures(section, {
+			prefersReducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+		});
+	}
+</script>

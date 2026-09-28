@@ -1,0 +1,16 @@
+---
+import { ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr/ArrowUpRight";
+import PrototypeLink from "./PrototypeLink.astro";
+
+interface Props {
+  href: string;
+  label: string;
+  ariaLabel?: string;
+}
+
+const { href, label, ariaLabel } = Astro.props;
+---
+
+<PrototypeLink class="text-link" href={href} ariaLabel={ariaLabel}>
+	{label}<ArrowUpRightIcon size={16} weight="regular" aria-hidden="true" />
+</PrototypeLink>

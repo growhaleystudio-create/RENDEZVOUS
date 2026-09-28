@@ -1,0 +1,27 @@
+---
+import { ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr/ArrowUpRight";
+import PrototypeLink from "./PrototypeLink.astro";
+
+interface Props {
+  sectionId: string;
+  index: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  ctaHref: string;
+  ctaLabel: string;
+}
+
+const { sectionId, index, eyebrow, title, description, ctaHref, ctaLabel } = Astro.props;
+---
+
+<header class="editorial-rail-heading">
+	<h2 class="editorial-rail-heading__title" id={`${sectionId}-heading`}>{title}</h2>
+	<div class="editorial-rail-heading__aside">
+		<p class="editorial-rail-heading__eyebrow">({index}) {eyebrow}</p>
+		<p class="editorial-rail-heading__description">{description}</p>
+		<PrototypeLink class="text-link editorial-rail-heading__link" href={ctaHref}>
+			{ctaLabel}<ArrowUpRightIcon size={16} weight="regular" aria-hidden="true" />
+		</PrototypeLink>
+	</div>
+</header>

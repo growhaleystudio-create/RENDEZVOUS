@@ -1,0 +1,21 @@
+---
+import { isActivePrototypeHref } from "../utils/navigation.js";
+
+interface Props {
+	href: string;
+	class?: string;
+	ariaLabel?: string;
+	as?: "span" | "div";
+}
+
+const { href, class: className, ariaLabel, as = "span" } = Astro.props;
+const active = isActivePrototypeHref(href);
+---
+
+{active ? (
+	<a href={href} class={className} aria-label={ariaLabel}><slot /></a>
+) : as === "div" ? (
+	<div class:list={[className, "prototype-link--inert"]} aria-label={ariaLabel}><slot /></div>
+) : (
+	<span class:list={[className, "prototype-link--inert"]} aria-label={ariaLabel}><slot /></span>
+)}

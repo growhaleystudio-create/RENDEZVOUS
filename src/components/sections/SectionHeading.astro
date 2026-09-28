@@ -1,0 +1,27 @@
+---
+interface Props {
+  sectionId: string;
+  index: string;
+  eyebrow: string;
+  title: string;
+  description?: string;
+  tone?: "light" | "dark";
+}
+
+const {
+  sectionId,
+  index,
+  eyebrow,
+  title,
+  description,
+  tone = "light",
+} = Astro.props;
+---
+
+<header class:list={["section-heading", `section-heading--${tone}`]}>
+	<p class="section-heading__eyebrow">({index}) {eyebrow}</p>
+	<div class="section-heading__content">
+		<h2 id={`${sectionId}-heading`}>{title}</h2>
+		{description && <p class="section-heading__description">{description}</p>}
+	</div>
+</header>

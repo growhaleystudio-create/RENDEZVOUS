@@ -1,0 +1,80 @@
+---
+import { PlusIcon } from "@phosphor-icons/react/dist/ssr/Plus";
+import EditorialLink from "./EditorialLink.astro";
+
+interface Photo {
+  src: string;
+  alt: string;
+}
+
+interface Branch {
+  id: string;
+  slug: string;
+  name: string;
+  city: string;
+  photos: Photo[];
+}
+
+interface Props {
+  branches: Branch[];
+  headingLevel?: "h2" | "h3";
+  showBooking?: boolean;
+}
+
+const { branches, headingLevel: Heading = "h3", showBooking = true } = Astro.props;
+const fanTilts = [-2, 1.5, -1, 2, -1.5];
+const peekTilts = [-1.5, 2, -2, 1, -1];
+---
+
+<div class="branch-drawers" data-branch-drawers>
+	<ol class="branch-list">
+		{branches.map((branch, index) => (
+			<li class="branch-row branch-row--drawer" data-branch={branch.id}>
+				<details class="branch-drawer" name="branches">
+					<summary class="branch-drawer__summary">
+						<span class="branch-row__index">0{index + 1}</span>
+						<span class="branch-row__name">
+							<Heading>{branch.name}</Heading>
+							<span>{branch.city}</span>
+						</span>
+						<span class="branch-drawer__spacer" aria-hidden="true"></span>
+						<span class="branch-drawer__toggle" aria-hidden="true"><PlusIcon size={18} weight="regular" /></span>
+						<span class="visually-hidden">Lihat foto referensi interior, bukan foto cabang {branch.name}</span>
+					</summary>
+					<div class="branch-drawer__panel">
+						<ul class="branch-drawer__photos">
+							{branch.photos.map((photo, photoIndex) => (
+								<li style={`--i: ${photoIndex}`}>
+									<figure class="branch-drawer__photo" style={`--tilt: ${fanTilts[photoIndex]}deg`}>
+										<img src={photo.src} alt={photo.alt} loading="lazy" width="600" height="750" />
+									</figure>
+								</li>
+							))}
+						</ul>
+					</div>
+				</details>
+				<div class="branch-row__actions">
+					<EditorialLink href={`/branches/${branch.slug}/`} label="Lihat cabang" />
+					{showBooking && <EditorialLink href={`/booking/?branch=${branch.id}`} label="Booking" />}
+				</div>
+			</li>
+		))}
+	</ol>
+	<div class="branch-peek" aria-hidden="true">
+		{branches.map((branch) => (
+			<div class="branch-peek__stack" data-branch={branch.id}>
+				{peekTilts.map((tilt, index) => (
+					<div class="branch-peek__card" style={`--i: ${index}; --tilt: ${tilt}deg`}>
+						<img alt="" src={branch.photos[index]?.src} width="600" height="750" decoding="async" />
+					</div>
+				))}
+			</div>
+		))}
+	</div>
+</div>
+
+<script>
+	import { setupBranchDrawers } from "../scripts/branch-drawers.js";
+
+	document.querySelectorAll<HTMLElement>("[data-branch-drawers]").forEach(setupBranchDrawers);
+</script>

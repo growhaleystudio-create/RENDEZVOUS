@@ -1,0 +1,28 @@
+---
+import PrototypeLink from "./PrototypeLink.astro";
+
+interface Item {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+	<ol>
+		{items.map((item) => (
+			<li>
+				{item.href ? (
+					<PrototypeLink href={item.href}>{item.label}</PrototypeLink>
+				) : (
+					<span aria-current="page">{item.label}</span>
+				)}
+			</li>
+		))}
+	</ol>
+</nav>

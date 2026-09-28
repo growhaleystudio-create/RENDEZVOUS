@@ -1,0 +1,42 @@
+---
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import EditorialButton from "../../components/EditorialButton.astro";
+import PrototypeLink from "../../components/PrototypeLink.astro";
+import { barbers, branches, services } from "../../data/demo-content.js";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+export function getStaticPaths() {
+	return barbers.map((barber) => ({ params: { slug: barber.slug }, props: { barber } }));
+}
+
+const { barber } = Astro.props;
+const barberBranches = branches.filter((branch) => barber.branchIds.includes(branch.id));
+const barberServices = services.filter((service) => barber.serviceIds.includes(service.id));
+const bookingBranch = barber.branchIds[0];
+---
+
+<SiteLayout title={`${barber.name} — Rendezvous`}>
+	<main class="page-view">
+		<div class="editorial-shell">
+			<Breadcrumb items={[{ label: "Beranda", href: "/" }, { label: "Barber", href: "/barbers/" }, { label: barber.name }]} />
+			<article class="detail-page detail-page--image">
+				<div class="detail-page__portrait">
+					<img src={barber.image} alt={barber.imageAlt} />
+				</div>
+				<div class="detail-page__copy">
+					<h1>{barber.name}</h1>
+					<p class="detail-page__intro">{barber.bio}</p>
+					<div class="detail-meta detail-meta--stacked">
+						<span>{barberBranches.map((branch) => branch.name).join(", ")}</span>
+						<span>{barber.specialties.join(", ")}</span>
+					</div>
+					<EditorialButton href={`/booking/?branch=${bookingBranch}&barber=${barber.id}`} label="Pilih barber ini" />
+					<div class="detail-page__aside">
+						<h2>Layanan</h2>
+						<ul>{barberServices.map((service) => <li><PrototypeLink href={`/services/${service.slug}/`}>{service.name}</PrototypeLink></li>)}</ul>
+					</div>
+				</div>
+			</article>
+		</div>
+	</main>
+</SiteLayout>

@@ -1,0 +1,267 @@
+/* Daftar cabang yang membuka jadi tumpukan foto tersebar, plus kartu foto saat hover. */
+.branch-row--drawer {
+  --row-h: clamp(5.75rem, 8vw, 7.5rem);
+  --actions-w: 14.5rem;
+  position: relative;
+  display: block;
+  padding: 0;
+}
+
+.branch-drawer__summary {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr) var(--actions-w) 2rem;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 2rem);
+  min-height: var(--row-h);
+  padding-block: 1rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.branch-drawer__summary::-webkit-details-marker {
+  display: none;
+}
+
+.branch-drawer__summary:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 4px;
+}
+
+.branch-drawer__summary .branch-row__name > :first-child {
+  margin: 0;
+}
+
+.branch-drawer__summary .branch-row__name > span {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--muted);
+}
+
+.branch-drawer__toggle {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  transition: transform var(--dur-base) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
+}
+
+.branch-drawer__summary:hover .branch-drawer__toggle {
+  background: var(--paper-2);
+}
+
+.branch-drawer[open] .branch-drawer__toggle {
+  transform: rotate(45deg);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Link aksi duduk sejajar baris, tapi di luar <summary>. */
+.branch-row--drawer > .branch-row__actions {
+  position: absolute;
+  top: 0;
+  right: calc(2rem + clamp(1rem, 2vw, 2rem));
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: var(--actions-w);
+  height: var(--row-h);
+}
+
+/* Baris melebar halus di browser yang mendukung ::details-content. */
+.branch-drawer {
+  interpolate-size: allow-keywords;
+}
+
+.branch-drawer::details-content {
+  height: 0;
+  overflow: clip;
+  /* tutup: lebih cepat, mempercepat keluar */
+  transition: height var(--dur-fast) var(--ease-in), content-visibility var(--dur-fast) allow-discrete;
+}
+
+.branch-drawer[open]::details-content {
+  height: auto;
+  /* buka: melambat saat tiba */
+  transition: height var(--dur-base) var(--ease-out), content-visibility var(--dur-base) allow-discrete;
+}
+
+.branch-drawer__panel {
+  padding: 0.5rem 0 2.25rem 2.5rem;
+}
+
+.branch-drawer__photos {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0.75rem 0.5rem;
+  list-style: none;
+}
+
+.branch-drawer__photos > li {
+  flex: 0 1 clamp(10rem, 17vw, 16rem);
+  min-width: 0;
+}
+
+.branch-drawer__photos > li + li {
+  margin-left: -1.25rem;
+}
+
+.branch-drawer__photo {
+  margin: 0;
+  box-shadow: 0 10px 22px rgb(17 17 17 / 0.14);
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+
+.branch-drawer__photos img,
+.branch-peek__card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 0.8;
+  height: auto;
+  object-fit: cover;
+}
+
+.branch-drawer__photos > li:hover {
+  position: relative;
+  z-index: 1;
+}
+
+.branch-drawer__photo:hover {
+  transform: translateY(-4px) rotate(0deg);
+  box-shadow: 0 16px 28px rgb(17 17 17 / 0.2);
+}
+
+.branch-drawer[open] .branch-drawer__photos > li {
+  animation: branch-fan-in var(--dur-base) var(--ease-out) both;
+  /* sepertiga stagger (40ms): laci tetap terasa cepat, 5 foto selesai dalam ~410ms */
+  animation-delay: calc(var(--i) * var(--stagger) / 3);
+}
+
+@keyframes branch-fan-in {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--i) * -85%)) rotate(-4deg);
+  }
+}
+
+/* Kartu yang mengikuti kursor. */
+.branch-peek {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  width: 13.5rem;
+  pointer-events: none;
+}
+
+.branch-peek__card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: calc(5 - var(--i));
+  opacity: 0;
+  scale: 0.9;
+  translate: calc(var(--i) * 7px) calc(var(--i) * -5px);
+  rotate: calc(var(--i) * 3deg - 6deg + var(--tilt, 0deg));
+  box-shadow: 0 10px 24px rgb(17 17 17 / 0.18);
+  transition: opacity var(--dur-fast) var(--ease-out), scale var(--dur-fast) var(--ease-out);
+}
+
+/* Hanya tumpukan cabang yang sedang di-hover yang terlihat; semua gambar sudah dimuat. */
+.branch-peek__stack {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+}
+
+.branch-peek__stack.is-active {
+  visibility: inherit;
+}
+
+.branch-peek.is-visible .branch-peek__card {
+  opacity: 1;
+  scale: 1;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .branch-peek {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .branch-drawer__summary {
+    grid-template-columns: 2rem minmax(0, 1fr) 2rem;
+    gap: 0.4rem 1rem;
+  }
+
+  .branch-drawer__spacer {
+    display: none;
+  }
+
+  .branch-drawer__toggle {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .branch-row--drawer > .branch-row__actions {
+    position: static;
+    justify-content: flex-start;
+    gap: 0.8rem 1.2rem;
+    width: auto;
+    height: auto;
+    padding: 0 0 1.25rem 3rem;
+  }
+
+  .branch-drawer__panel {
+    padding-left: 3rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .branch-drawer__panel {
+    padding: 0 0 1.25rem;
+  }
+
+  .branch-drawer__photos {
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: 0.75rem 0.25rem 1rem;
+  }
+
+  .branch-drawer__photos > li {
+    flex: 0 0 62%;
+    scroll-snap-align: start;
+  }
+
+  .branch-drawer__photos > li + li {
+    margin-left: 0;
+  }
+
+  .branch-drawer__photo {
+    transform: rotate(calc(var(--tilt) * 0.4));
+  }
+
+  .branch-row--drawer > .branch-row__actions {
+    padding-left: 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .branch-drawer::details-content,
+  .branch-drawer__toggle,
+  .branch-drawer__photo,
+  .branch-peek__card {
+    transition: none;
+  }
+
+  .branch-drawer[open] .branch-drawer__photos > li {
+    animation: none;
+  }
+}

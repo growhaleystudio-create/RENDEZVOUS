@@ -1,0 +1,63 @@
+/* Hero: satu intro saat halaman dibuka + parallax ringan saat scroll. Token di motion.css. */
+.campaign-hero .motion-line { overflow: clip; padding-bottom: .08em; margin-bottom: -.08em; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html[data-hero-intro="playing"] .campaign-hero .motion-line > span {
+    animation: editorial-title-rise var(--dur-intro) var(--ease-out) both;
+  }
+  html[data-hero-intro="playing"] .campaign-hero .motion-line:nth-child(2) > span {
+    animation-delay: calc(var(--stagger) * 2);
+  }
+  html[data-hero-intro="playing"] .campaign-hero__portrait {
+    animation: editorial-photo-left var(--dur-intro) var(--ease-out) calc(var(--stagger) * 3) both;
+  }
+  html[data-hero-intro="playing"] .campaign-hero__detail {
+    animation: editorial-photo-right var(--dur-intro) var(--ease-out) calc(var(--stagger) * 5) both;
+  }
+  html[data-hero-intro="playing"] .campaign-hero__lead {
+    animation: editorial-copy-in var(--dur-reveal) var(--ease-out) calc(var(--stagger) * 6) both;
+  }
+  html[data-hero-intro="playing"] .campaign-hero__cta {
+    animation: editorial-cta-in var(--dur-reveal) var(--ease-out) calc(var(--stagger) * 8) both;
+  }
+
+  /*
+   * Parallax: foto bergeser pelan mengikuti scroll. Skala dasar berlaku sejak paint pertama
+   * (--hero-progress default 0), jadi tidak ada lompatan saat script aktif. Transform saja.
+   */
+  .campaign-hero__portrait img {
+    transform: translateY(calc(var(--hero-progress, 0) * -3%)) scale(calc(1.08 - var(--hero-progress, 0) * .04));
+  }
+  .campaign-hero__detail img {
+    transform: translateY(calc(var(--hero-progress, 0) * 3%)) scale(calc(1.08 - var(--hero-progress, 0) * .04));
+  }
+}
+
+@keyframes editorial-title-rise {
+  from { transform: translateY(105%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes editorial-photo-left {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes editorial-photo-right {
+  from { clip-path: inset(0 0 0 100%); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes editorial-copy-in {
+  from { transform: translateY(var(--reveal-distance)); }
+  to { transform: translateY(0); }
+}
+
+@keyframes editorial-cta-in {
+  from { transform: translateY(var(--reveal-distance)); }
+  to { transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

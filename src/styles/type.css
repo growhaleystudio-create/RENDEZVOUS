@@ -1,0 +1,222 @@
+/*
+ * Sistem tipografi non-judul + tombol. Satu-satunya tempat ukuran teks diatur.
+ * Judul (h1/h2 display) tetap di file section masing-masing; Anton hanya untuk headline kampanye.
+ *
+ * Lima peran: label · caption · body · lead · item.
+ */
+:root {
+  --text-label: 0.6875rem; /* 11px */
+  --text-caption: 0.8125rem; /* 13px */
+  --text-body: 1rem; /* 16px */
+  --text-lead: clamp(1.25rem, 1.6vw, 1.5rem); /* 20–24px */
+  --text-item: clamp(1.25rem, 1.6vw, 1.5rem); /* 20–24px, lebih tebal dari lead */
+}
+
+/* label — kapital kecil untuk eyebrow, nomor urut, kategori, info ringkas */
+.section-heading__eyebrow,
+.campaign-kicker,
+.barbers-showcase-header__eyebrow,
+.editorial-rail-heading__eyebrow,
+.promo-swiss__facts,
+.article-entry__meta,
+.branch-row__index,
+.service-row__index,
+.campaign-service-card__number,
+.campaign-service-card__package,
+.lookbook-card__index,
+.faq-item summary span,
+.booking-progress span,
+.detail-page__aside h2,
+.barber-entry__image span,
+.site-brand small {
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+/* caption — info sekunder: spesialisasi, harga, kota, breadcrumb */
+.barber-entry__heading p,
+.barber-entry__meta,
+.campaign-service-card__meta,
+.branch-drawer__summary .branch-row__name > span,
+.breadcrumb {
+  font-size: var(--text-caption);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.45;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+}
+
+/* body — deskripsi dan teks baca */
+.campaign-service-card__description,
+.service-row__main > p,
+.article-entry > p:not(.article-entry__meta),
+.page-heading > p,
+.journal-detail > p:not(.section-heading__eyebrow, .journal-detail__excerpt),
+.section-heading__description,
+.editorial-rail-heading__description,
+.faq-item p,
+.booking-step-panel__hint,
+.detail-page__aside li,
+.detail-page__aside > p,
+.detail-meta span {
+  font-size: var(--text-body);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.55;
+}
+
+/* harga menonjol, sejajar kolom */
+.service-row__meta strong,
+.detail-meta strong {
+  font-size: var(--text-body);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* lead — satu kalimat pembuka per section */
+.campaign-hero__lead,
+.campaign-serif-copy,
+.promo-swiss__lead,
+.detail-page__intro,
+.journal-detail__excerpt {
+  font-size: var(--text-lead);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+/* item — nama layanan, cabang, barber, artikel, gaya lookbook */
+.campaign-service-card h3,
+.service-row__main h2,
+.service-row__main h3,
+.branch-drawer__summary .branch-row__name > :first-child,
+.barber-entry h2,
+.barber-entry h3,
+.article-entry h2,
+.article-entry h3,
+.lookbook-card__title {
+  font-size: var(--text-item);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* link teks — aksi tersier */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: fit-content;
+  font-size: var(--text-body);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+
+/* ─── Tombol: satu bentuk, dua varian ─────────────────────────── */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 3.25rem;
+  padding: 0 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 0;
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.button svg {
+  flex: 0 0 auto;
+  width: 1.1em;
+  height: 1.1em;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.button:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* primer: aksi utama (booking) */
+.button--primary {
+  background: var(--brand);
+  color: var(--paper);
+}
+
+.button--primary:hover {
+  background: var(--ink);
+}
+
+/* sekunder: aksi pendamping (kembali, alternatif) */
+.button--secondary {
+  border-color: currentColor;
+  background: transparent;
+  color: inherit;
+}
+
+.button--secondary:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+/* ukuran */
+.button--compact {
+  min-height: 2.5rem;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.button--block {
+  display: flex;
+  width: 100%;
+}
+
+/* di latar gelap, hover primer & sekunder berbalik ke terang */
+.promo-swiss .button--primary:hover,
+.site-footer .button--primary:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.promo-swiss .button--secondary:hover,
+.site-footer .button--secondary:hover {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--ink);
+}
+
+@media (max-width: 767px) {
+  .site-header .button--compact {
+    gap: 0.5rem;
+    padding: 0 0.75rem;
+  }
+
+  .site-header .button--compact svg {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .button svg {
+    transition: none;
+  }
+}

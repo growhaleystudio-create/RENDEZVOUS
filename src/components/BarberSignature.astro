@@ -1,0 +1,18 @@
+---
+interface Props {
+	paths: string[];
+}
+
+const { paths } = Astro.props;
+---
+
+<svg
+	class="barber-signature"
+	viewBox="0 0 240 80"
+	aria-hidden="true"
+	focusable="false"
+>
+	{paths.map((path) => (
+		<path d={path} pathLength="1" />
+	))}
+</svg>

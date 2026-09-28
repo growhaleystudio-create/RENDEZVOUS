@@ -1,0 +1,22 @@
+---
+import { voucher } from "../../data/demo-content.js";
+import VoucherPreview from "../VoucherPreview";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section id="voucher" class="editorial-section voucher-section" aria-labelledby="voucher-heading">
+	<div class="editorial-shell voucher-section__layout">
+		<SectionHeading
+			sectionId="voucher"
+			index="08"
+			eyebrow="Hadiah"
+			title={voucher.title}
+			description={voucher.description}
+		/>
+		<VoucherPreview
+			client:load
+			amounts={voucher.amounts}
+			disclaimer={voucher.disclaimer}
+		/>
+	</div>
+</section>

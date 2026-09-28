@@ -1,0 +1,278 @@
+/* Selected Campaign Editorial: composition layer over shared functional UI. */
+:root {
+  --font-campaign: "Anton", Impact, sans-serif;
+  --font-editorial: var(--font-display);
+  --campaign-rule: rgba(17, 17, 17, 0.26);
+  --campaign-space: clamp(2.75rem, 4vw, 5rem);
+}
+
+.site-header { padding-top: 0.4rem; }
+.site-header__inner { min-height: clamp(3.5rem, 6vw, 5.1rem); border-bottom: 1px solid var(--campaign-rule); gap: 1.5rem; }
+.site-brand { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; flex-shrink: 0; }
+.site-brand > span { font-size: var(--text-lg); font-weight: 600; text-transform: uppercase; letter-spacing: 0.3em; }
+
+.site-header .menu-trigger { order: 3; min-width: 44px; min-height: 44px; justify-content: center; }
+.site-header .menu-trigger span { display: none; }
+.site-header .desktop-nav { margin-left: auto; gap: clamp(1rem, 2.6vw, 3rem); }
+.site-header .menu-panel { left: auto; right: 0; border-radius: 0; box-shadow: 0 12px 28px #1111110d; }
+.site-header .menu-panel a { border-radius: 0; }
+.site-header .menu-panel a:hover { background: var(--paper-2); }
+
+.campaign-hero { padding-top: 1.1rem; }
+.campaign-hero__heading { display: grid; grid-template-columns: minmax(0, 2.3fr) minmax(0, 0.82fr); gap: clamp(1.75rem, 3vw, 3.5rem); align-items: center; padding-bottom: 1.2rem; }
+.campaign-hero h1 { margin: 0; font-family: var(--font-campaign); font-weight: 400; font-size: clamp(5rem, 13.8vw, 15.5rem); line-height: 1.01; letter-spacing: -0.04em; text-transform: uppercase; }
+.campaign-hero h1 span { display: block; white-space: nowrap; }
+.campaign-hero__intro { padding-block: 1rem; }
+.campaign-hero__intro p { margin: 0 0 1.75rem; max-width: 28ch; }
+
+.campaign-hero__diptych { display: grid; grid-template-columns: minmax(0, 69fr) minmax(0, 31fr); gap: 4px; max-width: var(--content-width); margin-inline: auto; }
+.campaign-hero__diptych figure { margin: 0; min-width: 0; height: clamp(20rem, 46.5vw, 52rem); overflow: hidden; }
+.campaign-hero__diptych img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.campaign-hero__portrait img { object-position: center; }
+.campaign-hero__detail img { object-position: center 48%; }
+.campaign-kicker { margin: 0 0 1.6rem; }
+.campaign-philosophy h2 { margin: 0; font-family: var(--font-editorial); font-size: var(--text-display); line-height: 1.02; font-weight: 500; letter-spacing: -0.045em; }
+
+.campaign-philosophy { display: grid; grid-template-columns: minmax(0, 35fr) minmax(0, 55fr) minmax(3rem, 8fr); gap: 2%; padding-block: var(--campaign-space); position: relative; }
+.campaign-philosophy::before { content: ""; position: absolute; left: var(--page-gutter); right: var(--page-gutter); top: 0; border-top: 1px solid var(--campaign-rule); }
+.campaign-philosophy__copy { padding-right: clamp(1rem, 3vw, 3rem); }
+.campaign-philosophy__copy .campaign-serif-copy { margin: 1.8rem 0 0; max-width: 33ch; }
+.campaign-philosophy__photo { position: relative; margin: 0; min-height: clamp(22rem, 43vw, 40rem); }
+.campaign-philosophy__photo img { position: absolute; display: block; width: 100%; height: 100%; object-fit: cover; }
+.campaign-services { padding-block: clamp(3.5rem, 5vw, 5.5rem); background: #101010; color: var(--paper); }
+.campaign-services__header { display: grid; grid-template-columns: minmax(8rem, 0.8fr) minmax(0, 3fr) minmax(12rem, 1.1fr); align-items: end; gap: clamp(1.25rem, 2.5vw, 3rem); margin-bottom: clamp(1.75rem, 3vw, 3rem); }
+.campaign-services__header .campaign-kicker { align-self: start; margin: 0; }
+.campaign-services h2 { margin: 0; font-family: var(--font-campaign); font-size: clamp(3.25rem, 5.35vw, 6rem); font-weight: 400; letter-spacing: -0.025em; line-height: 0.98; text-align: center; text-transform: uppercase; }
+.campaign-services__intro { max-width: 26ch; margin: 0; color: #c8c6c1; font-size: var(--text-caption); line-height: 1.5; }
+.campaign-service-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(0.5rem, 0.7vw, 0.75rem); margin: 0; padding: 0; list-style: none; }
+.campaign-service-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "copy media"; gap: inherit; min-width: 0; height: clamp(22rem, 29vw, 30rem); }
+.campaign-service-pair:nth-child(4n + 3), .campaign-service-pair:nth-child(4n + 4) { grid-template-areas: "media copy"; }
+.campaign-service-card { grid-area: copy; display: flex; flex-direction: column; justify-content: space-between; align-self: start; min-width: 0; min-height: 60%; padding: clamp(1rem, 1.5vw, 1.55rem); border: 1px solid var(--brand); background: var(--brand); color: var(--paper); transition: border-color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out); }
+.campaign-service-pair:nth-child(4n + 3) .campaign-service-card, .campaign-service-pair:nth-child(4n + 4) .campaign-service-card { align-self: end; }
+.campaign-service-card:hover, .campaign-service-card:focus-within { border-color: var(--paper); background: var(--brand-hover); }
+.campaign-service-card__top { display: flex; justify-content: space-between; gap: 1rem; }
+.campaign-service-card__body { padding-block: clamp(0.9rem, 1.4vw, 1.4rem); }
+.campaign-service-card__package { margin: 0 0 0.65rem; color: var(--paper); }
+.campaign-service-card h3 { margin: 0 0 0.65rem; }
+.campaign-service-card h3 a:hover { color: var(--paper); }
+.campaign-service-card__description { max-width: 32ch; margin: 0; color: var(--paper); }
+.campaign-service-card__meta { margin: 0; padding-top: 0.8rem; border-top: 1px solid #ffffff38; color: var(--paper); white-space: nowrap; }
+.campaign-service-pair__photo { grid-area: media; position: relative; display: block; min-width: 0; min-height: 0; overflow: hidden; background: #313131; }
+.campaign-service-pair__photo img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.42); }
+.campaign-service-pair__arrow { position: absolute; right: 0.75rem; bottom: 0.75rem; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border: 1px solid #ffffffbd; border-radius: 50%; background: #11111166; color: white; }
+.campaign-services__footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid #ffffff55; }
+.campaign-services__footer > span { color: #bdbbb7; font-size: var(--text-caption); }
+.campaign-services .text-link:hover { color: #a9c3c7; }
+
+.campaign-home .editorial-section { padding-block: clamp(3.5rem, 6vw, 6.5rem); }
+.campaign-home .section-heading { grid-template-columns: minmax(7rem, 0.22fr) minmax(0, 1fr); margin-bottom: 3rem; }
+.campaign-home .section-heading__content h2 { font-family: var(--font-editorial); font-weight: 500; font-size: var(--text-display); letter-spacing: -0.045em; max-width: 20ch; line-height: 1.02; }
+.campaign-home .section-heading__eyebrow { color: inherit; }
+.service-row__index, .branch-row__index { color: var(--brand); }
+.campaign-home .barber-entry__heading { display: block; }
+.campaign-home .barber-entry__heading p { margin-top: 0.5rem; }
+.campaign-home .article-grid { grid-template-columns: 1.5fr 1fr 1fr; align-items: start; }
+.campaign-home .article-entry:first-child .article-entry__image { aspect-ratio: 1; }
+.campaign-home .article-entry:not(:first-child) { padding-top: 4rem; }
+.campaign-home .faq-section .section-heading { grid-template-columns: 1fr; gap: 1.5rem; }
+.campaign-home .editorial-rail-heading { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(19rem, 0.78fr); align-items: end; gap: clamp(2rem, 6vw, 7rem); margin-bottom: clamp(1.5rem, 2.4vw, 2.25rem); padding-bottom: clamp(1.4rem, 2.5vw, 2.25rem); border-bottom: 1px solid var(--campaign-rule); }
+.campaign-home .editorial-rail-heading__title { max-width: 13ch; margin: 0; font-family: var(--font-editorial); font-size: var(--text-display); font-weight: 500; line-height: 1.02; letter-spacing: -0.045em; }
+.campaign-home .editorial-rail-heading__aside { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: 1.2rem; row-gap: 0.8rem; }
+.campaign-home .editorial-rail-heading__eyebrow { grid-column: 1 / -1; margin: 0; }
+.campaign-home .editorial-rail-heading__description { max-width: 40ch; margin: 0; color: var(--muted); }
+
+.campaign-home .lookbook-card:focus-visible { outline: 3px solid var(--brand); outline-offset: 4px; }
+.lookbook-gallery { min-width: 0; }
+.lookbook-rail { display: grid; grid-auto-columns: clamp(18rem, 27vw, 25rem); grid-auto-flow: column; gap: clamp(0.7rem, 1vw, 1rem); overflow-x: auto; overscroll-behavior-inline: contain; scroll-padding-inline: 1px; scroll-snap-type: x mandatory; margin: 0; padding: 0 1px 0.35rem; list-style: none; scrollbar-width: none; }
+.lookbook-rail::-webkit-scrollbar { display: none; }
+.lookbook-rail__item { min-width: 0; scroll-snap-align: start; }
+.lookbook-card { position: relative; display: block; overflow: hidden; aspect-ratio: 0.79; border-radius: 0; background: var(--surface); color: var(--paper); }
+.lookbook-card__image { display: block; width: 100%; height: 100%; object-fit: cover; }
+.lookbook-card__caption { position: absolute; inset: auto 0 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 0.3rem 1rem; padding: 2.8rem 1.1rem 1.1rem; background: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 0.56) 100%); }
+
+.lookbook-card__index { grid-column: 2; grid-row: 1; align-self: center; color: rgb(255 255 255 / 0.8); }
+.lookbook-card__caption svg { grid-column: 2; grid-row: 2; justify-self: end; align-self: center; }
+.lookbook-rail-control { display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; gap: 1.4rem; margin-top: 1.2rem; }
+.lookbook-rail-control__range { position: relative; display: flex; min-height: 2.75rem; align-items: center; cursor: pointer; }
+.lookbook-rail-control input[type="range"] { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; margin: 0; appearance: none; background: transparent; cursor: inherit; }
+.lookbook-rail-control input[type="range"]::-webkit-slider-runnable-track { height: 1px; background: linear-gradient(to right, var(--ink) 0%, var(--ink) var(--range-progress), var(--rule) var(--range-progress), var(--rule) 100%); }
+.lookbook-rail-control input[type="range"]::-moz-range-track { height: 1px; background: linear-gradient(to right, var(--ink) 0%, var(--ink) var(--range-progress), var(--rule) var(--range-progress), var(--rule) 100%); }
+.lookbook-rail-control input[type="range"]::-webkit-slider-thumb { width: 0.6rem; height: 0.6rem; margin-top: -0.25rem; appearance: none; border: 0; border-radius: 50%; background: var(--ink); }
+.lookbook-rail-control input[type="range"]::-moz-range-thumb { width: 0.6rem; height: 0.6rem; border: 0; border-radius: 50%; background: var(--ink); }
+.lookbook-rail-control input[type="range"]:focus-visible { outline: 0; }
+.lookbook-rail-control__range:has(input[type="range"]:focus-visible) { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 999px; }
+.lookbook-rail-control input[type="range"]:disabled { cursor: default; }
+.lookbook-rail-control__range:has(input[type="range"]:disabled) { cursor: default; opacity: 0.45; }
+.testimonials-pending { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: clamp(1rem, 3vw, 3.5rem); min-height: 13rem; padding: clamp(1.5rem, 3.6vw, 3.5rem); border-radius: var(--radius); background: var(--charcoal); color: var(--paper); }
+.testimonials-pending__mark { color: var(--brand); }
+.testimonials-pending__eyebrow { margin: 0 0 0.7rem; color: rgb(248 247 243 / 0.68); font-size: var(--text-3xs); font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+.testimonials-pending__message { max-width: 32ch; margin: 0; font-size: clamp(1.25rem, 2.1vw, 2rem); font-weight: 400; letter-spacing: -0.04em; line-height: 1.2; }
+.testimonials-pending__count { display: grid; justify-items: end; gap: 0.15rem; align-self: end; }
+.testimonials-pending__count span:first-child { font-family: var(--font-editorial); font-size: clamp(3rem, 5vw, 5rem); font-weight: 500; line-height: 0.95; }
+.testimonials-pending__count span:last-child { color: rgb(248 247 243 / 0.65); font-size: var(--text-3xs); font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; white-space: nowrap; }
+.campaign-space-photo { position: relative; margin: 0 0 2rem; }
+.campaign-space-photo img { display: block; width: 100%; height: clamp(20rem, 40vw, 38rem); object-fit: cover; object-position: center 56%; }
+.campaign-space-photo figcaption { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1rem; border-bottom: 1px solid var(--campaign-rule); font-size: var(--text-xs); }
+.campaign-space-photo figcaption span { text-transform: uppercase; font-size: var(--text-3xs); letter-spacing: 0.16em; }
+.campaign-directory-link { display: flex; justify-content: flex-end; margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--campaign-rule); }
+
+@media (min-width: 1600px) {
+  .campaign-hero h1 { font-size: 15.2rem; }
+}
+@media (max-width: 1100px) {
+  .site-brand > span { font-size: var(--text-md); letter-spacing: 0.3em; }
+  .site-header .desktop-nav { gap: 1.25rem; font-size: var(--text-md); }
+  .campaign-hero__intro p { margin-bottom: 1.15rem; }
+
+  .campaign-philosophy__copy { padding-right: 0; }
+  .campaign-services__header { grid-template-columns: minmax(8rem, 0.55fr) minmax(0, 2fr); }
+  .campaign-services__intro { grid-column: 2; max-width: 40ch; }
+  .campaign-services h2 { text-align: left; }
+  .campaign-service-grid { grid-template-columns: 1fr; }
+  .campaign-service-pair { height: 24rem; }
+}
+
+@media (max-width: 767px) {
+  .campaign-home .barber-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .campaign-home .barber-entry__image { aspect-ratio: 1; }
+  .site-header { padding-top: 0.4rem; }
+  .site-header__inner { gap: 0.65rem; min-height: 4.5rem; }
+  .site-brand > span { font-size: var(--text-sm); letter-spacing: 0.16em; }
+
+  .site-header .desktop-nav { margin-left: auto; }
+
+  .site-header .menu-trigger { min-width: 44px; }
+  .campaign-hero { padding-top: 1.6rem; }
+  .campaign-hero__heading { grid-template-columns: 1fr; gap: 1.25rem; padding-bottom: 1.75rem; }
+  .campaign-hero h1 { font-size: clamp(3rem, 17.3vw, 8rem); line-height: 1.05; letter-spacing: -0.04em; }
+  .campaign-hero__intro { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1rem; padding: 0; }
+  .campaign-hero__intro .campaign-hero__lead { margin: 0; }
+  .campaign-hero__intro > p:not(.campaign-hero__lead) { grid-column: 1 / -1; grid-row: 2; margin: 0; max-width: 46ch; font-size: var(--text-sm); }
+
+  .campaign-hero__diptych { grid-template-columns: 64fr 36fr; gap: 3px; }
+  .campaign-hero__diptych figure { height: clamp(17rem, 61vw, 30rem); }
+  .campaign-hero__portrait img { object-position: 56% center; }
+  .campaign-philosophy { grid-template-columns: 1fr; gap: 2rem; padding-block: 2.25rem; }
+  .campaign-philosophy h2 { font-size: clamp(3.75rem, 13vw, 6.5rem); }
+  .campaign-philosophy__copy .campaign-serif-copy { max-width: 48ch; margin-top: 1.2rem; }
+  .campaign-philosophy__photo { min-height: 0; }
+  .campaign-philosophy__photo img { position: static; height: auto; aspect-ratio: 1.12; }
+  .campaign-services__header { grid-template-columns: 1fr; gap: 0.85rem; }
+  .campaign-services__intro { grid-column: 1; }
+  .campaign-services h2 { font-size: clamp(3.1rem, 10vw, 5rem); }
+  .campaign-kicker { margin-bottom: 1.2rem; }
+  .campaign-service-pair { height: 20rem; }
+  .campaign-home .section-heading { grid-template-columns: 1fr; gap: 1.2rem; margin-bottom: 2rem; }
+  .campaign-home .section-heading__content h2 { font-size: clamp(3rem, 11vw, 4.8rem); }
+  .campaign-home .editorial-rail-heading { grid-template-columns: 1fr; gap: 1.4rem; margin-bottom: 1.35rem; padding-bottom: 1.25rem; }
+  .campaign-home .editorial-rail-heading__title { max-width: 10ch; font-size: clamp(2.8rem, 10vw, 4.5rem); }
+  .campaign-home .editorial-rail-heading__aside { grid-template-columns: minmax(0, 1fr) auto; }
+  .campaign-home .editorial-rail-heading__description { max-width: 42ch; }
+  .lookbook-rail { grid-auto-columns: clamp(15rem, 31vw, 19rem); gap: 0.7rem; }
+  .lookbook-card { aspect-ratio: 0.82; }
+  .lookbook-card__caption { padding: 2.5rem 1rem 1rem; }
+  .testimonials-pending { grid-template-columns: auto minmax(0, 1fr) auto; gap: 1rem; min-height: 11rem; }
+  .testimonials-pending__count { grid-column: 3; grid-row: 1; align-self: start; }
+  .campaign-home .article-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .campaign-home .article-entry:not(:first-child) { padding-top: 0; }
+  .campaign-home .article-entry:first-child .article-entry__image { aspect-ratio: 1.35; }
+  .lookbook-filters { margin-top: 0; }
+  .service-row { grid-template-columns: 2rem minmax(0, 1fr); }
+  .branch-row { grid-template-columns: 2rem minmax(0, 1fr); }
+}
+@media (max-width: 480px) {
+  .campaign-hero__diptych { grid-template-columns: 1fr; }
+  .campaign-hero__diptych .campaign-hero__portrait { height: auto; aspect-ratio: 1.5; }
+  .campaign-hero__detail { display: none; }
+  .campaign-home .editorial-rail-heading__aside { grid-template-columns: 1fr; align-items: start; }
+  .campaign-home .editorial-rail-heading__eyebrow,
+  .campaign-home .editorial-rail-heading__description { grid-column: 1; }
+
+  .lookbook-rail-control { grid-template-columns: minmax(0, 1fr); gap: 0.35rem; margin-top: 0.8rem; }
+  .testimonials-pending { grid-template-columns: auto 1fr; align-items: start; }
+  .testimonials-pending__mark { grid-column: 1; grid-row: 1; }
+  .testimonials-pending__count { grid-column: 2; grid-row: 1; }
+  .testimonials-pending > div { grid-column: 1 / -1; }
+}
+@media (max-width: 639px) {
+  .campaign-service-grid { gap: 1rem; }
+  .campaign-service-pair, .campaign-service-pair:nth-child(4n + 3), .campaign-service-pair:nth-child(4n + 4) { grid-template-columns: 1fr; grid-template-areas: "media" "copy"; gap: 0; height: auto; }
+  .campaign-service-pair__photo { aspect-ratio: 1.42; }
+  .campaign-service-card, .campaign-service-pair:nth-child(4n + 3) .campaign-service-card, .campaign-service-pair:nth-child(4n + 4) .campaign-service-card { align-self: stretch; min-height: 0; }
+  .campaign-service-card__body { padding-block: 1.25rem; }
+  .campaign-service-card__description { max-width: 45ch; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .campaign-service-card, .campaign-service-pair__photo img { transition: none; }
+}
+@media (max-width: 370px) {
+  .site-brand > span { font-size: var(--text-xs); }
+  .site-header__inner { gap: 0.4rem; }
+  .site-header__booking-extra { display: none; }
+  .campaign-hero__intro { grid-template-columns: 1fr; }
+}
+
+.campaign-home .barbers-section { background: var(--paper); }
+.campaign-home .barbers-showcase-header { padding-bottom: 1.25rem; border-bottom: 1px solid var(--campaign-rule); }
+.barbers-showcase-header__eyebrow { margin: 0 0 0.8rem; }
+.barbers-showcase-header h2 { margin: 0; font-family: var(--font-editorial); font-size: var(--text-display); font-weight: 500; letter-spacing: -0.045em; line-height: 1.02; }
+.campaign-home .barber-showcase-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(0.7rem, 1.15vw, 1.1rem); margin-top: 1.5rem; }
+.campaign-home .barber-showcase-grid:focus-visible { outline: 2px solid var(--brand); outline-offset: 6px; }
+.campaign-home .barber-showcase-grid .barber-entry { min-width: 0; scroll-snap-align: start; }
+.campaign-home .barber-showcase-grid .barber-entry__image { aspect-ratio: 0.8; background: var(--surface); }
+.campaign-home .barber-showcase-grid .barber-entry__image:focus-visible { outline: 3px solid var(--brand); outline-offset: 4px; }
+.campaign-home .barber-showcase-grid .barber-entry__image img { object-position: center 35%; }
+.barber-signature { position: absolute; z-index: 1; top: 0.85rem; left: 0.8rem; width: min(34%, 8rem); height: auto; overflow: visible; fill: none; stroke: #171717; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.barber-signature path { vector-effect: non-scaling-stroke; }
+.campaign-home .barber-showcase-grid .barber-entry__heading { display: block; margin-top: 0.9rem; }
+.campaign-home .barber-showcase-grid .barber-entry__heading h3 { margin: 0; }
+.campaign-home .barber-showcase-grid .barber-entry__heading p { margin: 0.45rem 0 0; }
+.campaign-home .barbers-showcase-footer { display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--campaign-rule); }
+.barbers-showcase-footer > p { max-width: 56ch; margin: 0; color: var(--muted); font-size: var(--text-xs); line-height: 1.5; }
+
+@media (max-width: 1024px) {
+  .campaign-home .barber-showcase-grid { grid-template-columns: none; grid-auto-columns: minmax(17rem, 34vw); grid-auto-flow: column; gap: 0.85rem; overflow-x: auto; overscroll-behavior-inline: contain; scroll-padding-inline: 1px; scroll-snap-type: x proximity; padding: 0 1px 0.8rem; scrollbar-color: var(--ink) var(--campaign-rule); scrollbar-width: thin; }
+  .campaign-home .barber-showcase-grid::-webkit-scrollbar { height: 0.45rem; }
+  .campaign-home .barber-showcase-grid::-webkit-scrollbar-track { background: var(--campaign-rule); }
+  .campaign-home .barber-showcase-grid::-webkit-scrollbar-thumb { background: var(--ink); }
+}
+
+@media (max-width: 767px) {
+  .campaign-home .barbers-showcase-header { padding-bottom: 1rem; }
+  .barbers-showcase-header__eyebrow { margin-bottom: 0.65rem; }
+  .barbers-showcase-header h2 { max-width: 11ch; }
+  .campaign-home .barber-showcase-grid { grid-auto-columns: minmax(78vw, 82vw); gap: 0.75rem; margin-top: 1.15rem; }
+  .campaign-home .barber-showcase-grid .barber-entry__image { aspect-ratio: 0.8; }
+  .campaign-home .barber-showcase-grid .barber-entry__heading { margin-top: 0.7rem; }
+
+  .campaign-home .barbers-showcase-footer { align-items: start; flex-direction: column; gap: 0.85rem; margin-top: 1rem; }
+  .barbers-showcase-footer > p { font-size: var(--text-2xs); }
+}
+
+@keyframes barber-signature-write {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+.barber-signature path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  #barbers[data-signature-state="waiting"] .barber-signature path { stroke-dashoffset: 1; }
+  #barbers[data-signature-state="writing"] .barber-signature path {
+    animation: barber-signature-write var(--dur-draw) var(--ease-in-out) var(--dur-base) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .barber-signature path { animation: none !important; stroke-dashoffset: 0 !important; }
+}
+
+/* Satu gaya eyebrow untuk semua section dan halaman. */
+.campaign-kicker,
+.section-heading__eyebrow,
+.campaign-home .section-heading__eyebrow,
+.campaign-home .editorial-rail-heading__eyebrow,
+.barbers-showcase-header__eyebrow {
+  color: inherit;
+}
+.campaign-home .barbers-showcase-footer { justify-content: flex-end; }

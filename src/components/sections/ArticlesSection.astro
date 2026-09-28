@@ -1,0 +1,33 @@
+---
+import { articles } from "../../data/demo-content.js";
+import EditorialLink from "../EditorialLink.astro";
+import SectionHeading from "./SectionHeading.astro";
+import PrototypeLink from "../PrototypeLink.astro";
+---
+
+<section id="articles" class="editorial-section articles-section" aria-labelledby="articles-heading">
+	<div class="editorial-shell">
+		<SectionHeading
+			sectionId="articles"
+			index="07"
+			eyebrow="Jurnal"
+			title="Catatan tentang rambut dan perawatan."
+		/>
+		<div class="article-grid">
+			{articles.map((article, index) => (
+				<article class="article-entry">
+					<PrototypeLink as="div" href={`/journal/${article.slug}/`} class="article-entry__image">
+							<img src={article.image} alt={article.imageAlt} loading="lazy" />
+						</PrototypeLink>
+					<p class="article-entry__meta">0{index + 1} / {article.category}</p>
+					<h3><PrototypeLink href={`/journal/${article.slug}/`}>{article.title}</PrototypeLink></h3>
+					<p>{article.excerpt}</p>
+					<EditorialLink href={`/journal/${article.slug}/`} label="Baca artikel" />
+				</article>
+			))}
+		</div>
+		<div class="campaign-directory-link">
+			<EditorialLink href="/journal/" label="Baca semua jurnal" />
+		</div>
+	</div>
+</section>

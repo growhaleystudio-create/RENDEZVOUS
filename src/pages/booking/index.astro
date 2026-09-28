@@ -1,0 +1,15 @@
+---
+import { ArrowLeftIcon } from "@phosphor-icons/react/dist/ssr/ArrowLeft";
+import { barbers, branches, services } from "../../data/demo-content.js";
+import BookingWizard from "../../components/BookingWizard";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+
+<SiteLayout title="Booking — Rendezvous" description="Pilih cabang, layanan, barber, dan waktu kunjungan Rendezvous.">
+	<main class="booking-page">
+		<div class="editorial-shell">
+			<a class="text-link booking-back-link" href="/"><ArrowLeftIcon size={18} aria-hidden="true" />Beranda</a>
+			<BookingWizard client:load branches={branches} services={services} barbers={barbers} />
+		</div>
+	</main>
+</SiteLayout>

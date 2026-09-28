@@ -1,0 +1,28 @@
+---
+import EditorialButton from "../EditorialButton.astro";
+import { promo, services } from "../../data/demo-content.js";
+
+const price = new Intl.NumberFormat("id-ID", {
+	style: "currency",
+	currency: "IDR",
+	maximumFractionDigits: 0,
+});
+const startingPrice = `Mulai ${price.format(Math.min(...services.map((service) => service.price)))}`;
+---
+
+<section id="promo" class="editorial-section promo-section promo-swiss" aria-labelledby="promo-heading">
+	<div class="editorial-shell">
+		<p class="section-heading__eyebrow promo-swiss__eyebrow">(06) {promo.eyebrow}</p>
+		<h2 id="promo-heading" class="promo-swiss__title">{promo.title}</h2>
+	</div>
+	<div class="promo-swiss__media">
+		<img class="promo-swiss__photo" src="/images/photography/barbers-chair-team.jpg" alt="Kursi barber menghadap ke depan dengan enam barber berdiri di belakangnya." width="1536" height="1024" loading="lazy" decoding="async" />
+	</div>
+	<div class="editorial-shell">
+		<div class="promo-swiss__body">
+			<p class="promo-swiss__lead">{promo.description}</p>
+			<p class="promo-swiss__facts">{startingPrice}</p>
+			<EditorialButton href="/booking/" label="Booking sekarang" class="promo-swiss__cta" />
+		</div>
+	</div>
+</section>

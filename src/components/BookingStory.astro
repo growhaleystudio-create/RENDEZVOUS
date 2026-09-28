@@ -1,0 +1,54 @@
+---
+import EditorialButton from "./EditorialButton.astro";
+
+interface Props {
+  bookingUrl: string;
+}
+
+const { bookingUrl } = Astro.props;
+
+const steps = [
+  {
+    number: "01",
+    title: "Pilih kunjungan",
+    description: "Tentukan cabang dan layanan yang kamu inginkan.",
+  },
+  {
+    number: "02",
+    title: "Atur waktu",
+    description: "Pilih barber, tanggal, dan slot yang tersedia.",
+  },
+  {
+    number: "03",
+    title: "Konfirmasi",
+    description: "Lengkapi data tamu untuk menyimpan booking.",
+  },
+];
+---
+
+<section class="booking-story" id="cara-booking" aria-labelledby="booking-title">
+	<div class="booking-story__inner">
+		<p class="section-index">(01) Cara booking</p>
+		<div class="booking-story__heading">
+			<h2 id="booking-title">Make time<br /><em>for yourself.</em></h2>
+			<p class="booking-story__summary">
+				Pilih cabang, layanan, barber, dan slot waktu sesuai kebutuhanmu.
+			</p>
+		</div>
+
+		<ol class="booking-steps">
+			{steps.map((step) => (
+				<li class="booking-step">
+					<span class="booking-step__number">{step.number}</span>
+					<h3>{step.title}</h3>
+					<p>{step.description}</p>
+				</li>
+			))}
+		</ol>
+
+		<div class="booking-story__action">
+			<p>Siap pilih jadwal?</p>
+			<EditorialButton href={bookingUrl} label="Mulai booking" variant="light" />
+		</div>
+	</div>
+</section>

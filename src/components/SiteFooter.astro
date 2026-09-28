@@ -1,0 +1,70 @@
+---
+import { EnvelopeSimpleIcon } from "@phosphor-icons/react/dist/ssr/EnvelopeSimple";
+import { PhoneIcon } from "@phosphor-icons/react/dist/ssr/Phone";
+import { services, siteSettings } from "../data/demo-content.js";
+import PrototypeLink from "./PrototypeLink.astro";
+
+const sectionPrefix = Astro.url.pathname === "/" ? "" : "/";
+const phoneHref = `tel:${siteSettings.contactPhone.replaceAll(/[^+\d]/g, "")}`;
+const footerGroups = [
+	{
+		title: "Jelajahi",
+		links: [
+			{ label: "Pendekatan", href: `${sectionPrefix}#philosophy` },
+			{ label: "Cabang", href: "/branches/" },
+			{ label: "Barber", href: "/barbers/" },
+			{ label: "Lookbook", href: `${sectionPrefix}#lookbook` },
+		],
+	},
+	{
+		title: "Lainnya",
+		links: [
+			{ label: "Jurnal", href: "/journal/" },
+			{ label: "Tanya jawab", href: `${sectionPrefix}#faq` },
+			{ label: "Semua layanan", href: "/services/" },
+		],
+	},
+];
+---
+
+<footer class="site-footer" id="site-footer">
+	<div class="editorial-shell site-footer__top">
+		<div class="site-footer__contact">
+			<p class="site-footer__eyebrow">{siteSettings.brand} / {siteSettings.descriptor}</p>
+			<div class="site-footer__contact-methods" aria-label="Cara menghubungi Rendezvous">
+				<a
+					class="site-footer__contact-action"
+					href={`mailto:${siteSettings.contactEmail}`}
+					aria-label={`Kirim email ke ${siteSettings.contactEmail}`}
+				>
+					<EnvelopeSimpleIcon size={21} weight="regular" aria-hidden="true" />
+				</a>
+				<a
+					class="site-footer__contact-action"
+					href={phoneHref}
+					aria-label={`Telepon ${siteSettings.contactPhone}`}
+				>
+					<PhoneIcon size={21} weight="regular" aria-hidden="true" />
+				</a>
+			</div>
+			<p class="site-footer__contact-label">Hubungi kami</p>
+			<div class="site-footer__contact-details">
+				<a href={`mailto:${siteSettings.contactEmail}`}>{siteSettings.contactEmail}</a>
+				<a href={phoneHref}>{siteSettings.contactPhone}</a>
+			</div>
+		</div>
+
+		<nav class="site-footer__navigation" aria-label="Navigasi footer">
+			{footerGroups.map((group) => (
+				<div class="site-footer__link-group">
+					<h2>{group.title}</h2>
+					<ul>
+						{group.links.map((link) => <li><PrototypeLink href={link.href}>{link.label}</PrototypeLink></li>)}
+					</ul>
+				</div>
+			))}
+		</nav>
+	</div>
+
+	<p class="site-footer__wordmark" aria-hidden="true">{siteSettings.brand}</p>
+</footer>

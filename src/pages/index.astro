@@ -1,0 +1,50 @@
+---
+import EditorialHero from "../components/EditorialHero.astro";
+import PhilosophySection from "../components/sections/PhilosophySection.astro";
+import ServicesSection from "../components/sections/ServicesSection.astro";
+import BranchesSection from "../components/sections/BranchesSection.astro";
+import BarbersSection from "../components/sections/BarbersSection.astro";
+import LookbookSection from "../components/sections/LookbookSection.astro";
+import PromoSection from "../components/sections/PromoSection.astro";
+import TestimonialsSection from "../components/sections/TestimonialsSection.astro";
+import ArticlesSection from "../components/sections/ArticlesSection.astro";
+import FaqSection from "../components/sections/FaqSection.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { testimonials } from "../data/demo-content.js";
+import "../styles/editorial-motion.css";
+
+const bookingUrl =
+  import.meta.env.PUBLIC_BOOKING_URL ??
+  "/booking/";
+---
+
+<SiteLayout>
+	<script is:inline>
+		// Runs before the hero markup is parsed, so its entrance is visible on first paint.
+		if (
+			(!location.hash || location.hash === "#top") &&
+				scrollY < 40 &&
+				!matchMedia("(prefers-reduced-motion: reduce)").matches
+		) {
+			document.documentElement.dataset.heroIntro = "playing";
+		}
+	</script>
+	<main class="campaign-home">
+		<EditorialHero bookingUrl={bookingUrl} />
+		<PhilosophySection />
+		<ServicesSection />
+		<BranchesSection />
+		<BarbersSection />
+		<LookbookSection />
+		<PromoSection />
+		{testimonials.published && <TestimonialsSection />}
+		<ArticlesSection />
+		<FaqSection />
+	</main>
+</SiteLayout>
+
+<script>
+  import { initEditorialMotion } from "../scripts/editorial-motion.js";
+  const cleanup = initEditorialMotion();
+  if (import.meta.hot) import.meta.hot.dispose(cleanup);
+</script>

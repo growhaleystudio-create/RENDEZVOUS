@@ -1,0 +1,22 @@
+---
+import { lookbookItems, services } from "../../data/demo-content.js";
+import LookbookGallery from "../LookbookGallery";
+import EditorialRailHeading from "../EditorialRailHeading.astro";
+---
+
+<section id="lookbook" class="editorial-section lookbook-section" aria-labelledby="lookbook-heading">
+	<div class="editorial-shell">
+		<EditorialRailHeading
+			sectionId="lookbook"
+			index="05"
+			eyebrow="Lookbook"
+			title="Find your next look."
+			description="Gunakan foto referensi untuk menjelaskan potongan yang kamu inginkan."
+			ctaHref="/services/"
+			ctaLabel="Jelajahi layanan"
+		/>
+		<div class="motion-gallery">
+			<LookbookGallery client:load items={lookbookItems} services={services} />
+		</div>
+	</div>
+</section>
