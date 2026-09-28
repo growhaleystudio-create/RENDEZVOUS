@@ -3,19 +3,24 @@ import "../styles/global.css";
 import "../styles/campaign.css";
 import "../styles/branch-drawer.css";
 import "../styles/promo.css";
+import "../styles/booking.css";
 import "../styles/type.css";
 import "../styles/motion.css";
 import SiteNavigation from "../components/SiteNavigation";
 import SiteFooter from "../components/SiteFooter.astro";
+import BookingHeader from "../components/BookingHeader.astro";
 
 interface Props {
   title?: string;
   description?: string;
+  /** "booking" = header checkout yang fokus, tanpa navigasi situs. */
+  header?: "site" | "booking";
 }
 
 const {
   title = "Rendezvous — Your next good hair day",
   description = "Kenali layanan, barber, dan cabang Rendezvous di Jakarta, Bandung, Bali, dan Surabaya.",
+  header = "site",
 } = Astro.props;
 const bookingUrl = import.meta.env.PUBLIC_BOOKING_URL ?? "/booking/";
 const sectionPrefix = Astro.url.pathname === "/" ? "" : "/";
@@ -38,7 +43,11 @@ const sectionPrefix = Astro.url.pathname === "/" ? "" : "/";
 		<title>{title}</title>
 	</head>
 	<body>
-		<SiteNavigation client:load bookingUrl={bookingUrl} sectionPrefix={sectionPrefix} />
+		{header === "booking" ? (
+			<BookingHeader />
+		) : (
+			<SiteNavigation client:load bookingUrl={bookingUrl} sectionPrefix={sectionPrefix} />
+		)}
 		<slot />
 		<SiteFooter />
 	</body>

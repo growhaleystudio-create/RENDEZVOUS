@@ -22,7 +22,7 @@ test('inert prototype entries keep their normal visuals without navigation or di
   const hero = html.match(/<div class="campaign-hero__intro">[\s\S]*?<\/div>/)?.[0] ?? '';
   assert.match(hero, /class="button button--primary campaign-hero__cta[^"]*"/);
   assert.match(hero, /<svg\b/);
-  assert.doesNotMatch(hero, /href="\/booking\/"/);
+  assert.match(hero, /href="\/booking\/"/, 'the hero CTA opens the booking flow');
   assert.doesNotMatch(html, /prototype-link--disabled|aria-disabled="true"/);
   assert.doesNotMatch(styles, /\.prototype-link--disabled/);
 });

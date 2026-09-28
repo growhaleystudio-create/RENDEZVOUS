@@ -17,6 +17,6 @@ test("booking labels distinguish a local summary from a confirmed appointment", 
   assert.match(bookingWizard, /Jadwal yang ditampilkan belum terhubung ke ketersediaan cabang\./);
   assert.match(bookingWizard, /Permintaan belum dikirim dan jadwal belum dikonfirmasi\./);
   assert.match(bookingWizard, /Data ini hanya ditampilkan di ringkasan; tidak dikirim ke cabang\./);
-  assert.match(bookingWizard, /const submitLabels = \["Pilih layanan", "Pilih barber", "Pilih jadwal", "Isi data kontak", "Tinjau pilihan", "Buat ringkasan"\]/);
+  assert.match(bookingWizard, /const submitLabels = \["Lanjutkan", "Lanjutkan", "Lanjutkan", "Lanjutkan", "Buat ringkasan"\]/);
   assert.doesNotMatch(bookingWizard, /Booking selesai|Konfirmasi booking|Jam tersedia/);
 });

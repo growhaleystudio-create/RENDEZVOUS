@@ -1,0 +1,27 @@
+---
+// Header "checkout" untuk alur booking: tanpa navigasi situs supaya pengunjung fokus menyelesaikan booking.
+// Pola umum aplikasi booking (Fresha, Booksy): identitas di kiri, bantuan + keluar di kanan.
+import { PhoneIcon } from "@phosphor-icons/react/dist/ssr/Phone";
+import { XIcon } from "@phosphor-icons/react/dist/ssr/X";
+import { siteSettings } from "../data/demo-content.js";
+
+const phoneHref = `tel:${siteSettings.contactPhone.replaceAll(/[^+\d]/g, "")}`;
+---
+
+<header class="booking-header">
+	<div class="editorial-shell booking-header__inner">
+		<a class="site-brand" href="/" aria-label="Rendezvous — beranda">
+			<span>Rendezvous</span>
+			<small>Barbershop</small>
+		</a>
+		<div class="booking-header__actions">
+			<a class="booking-header__help" href={phoneHref}>
+				<PhoneIcon size={18} aria-hidden="true" />
+				<span>Butuh bantuan? <strong>{siteSettings.contactPhone}</strong></span>
+			</a>
+			<a class="booking-header__close" href="/" aria-label="Keluar dari booking">
+				<XIcon size={20} aria-hidden="true" />
+			</a>
+		</div>
+	</div>
+</header>

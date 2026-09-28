@@ -25,7 +25,6 @@
 .campaign-service-card__package,
 .lookbook-card__index,
 .faq-item summary span,
-.booking-progress span,
 .detail-page__aside h2,
 .barber-entry__image span,
 .site-brand small {
@@ -187,6 +186,26 @@
 .button--block {
   display: flex;
   width: 100%;
+}
+
+/*
+ * Pill: gaya CTA alur booking, mengikuti pola aplikasi booking (Fresha, Booksy):
+ * sudut membulat penuh, teks kalimat biasa 16px, lebih tinggi. Warna tetap dari varian.
+ */
+.button--pill {
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3.5rem;
+  padding: 0 1.75rem;
+  border-radius: 999px;
+  font-size: var(--text-body);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.button--pill.button--compact {
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
 }
 
 /* di latar gelap, hover primer & sekunder berbalik ke terang */

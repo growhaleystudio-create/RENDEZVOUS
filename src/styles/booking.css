@@ -1,0 +1,926 @@
+/*
+ * Wizard booking — pola umum aplikasi booking (Fresha, Booksy, Square):
+ * langkah berupa breadcrumb, pilihan berupa kartu, ringkasan yang selalu terlihat di samping.
+ */
+/* Header checkout: identitas di kiri, bantuan + keluar di kanan, tanpa navigasi situs. */
+.booking-header {
+  background: var(--paper);
+}
+
+.booking-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 4.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.booking-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.booking-header__help {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.booking-header__help strong {
+  color: var(--ink);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.booking-header__help:hover strong {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.booking-header__close {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  color: var(--ink);
+  transition: border-color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
+}
+
+.booking-header__close:hover {
+  border-color: var(--ink);
+  background: var(--paper-2);
+}
+
+.booking-header__help:focus-visible,
+.booking-header__close:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+  /* HP: bantuan cukup ikon telepon yang bisa diketuk. */
+  .booking-header__help span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .booking-header__help {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    color: var(--ink);
+  }
+}
+
+/* Wizard memakai lebar konten yang sama dengan header, jadi tepi kiri-kanannya sejajar. */
+.booking-wizard {
+  margin-top: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+/*
+ * Stepper bernomor (pola wizard booking umum): lingkaran + garis penghubung + label.
+ * Selesai = centang (bisa diklik untuk kembali), aktif = cincin merah, berikutnya = redup.
+ */
+.booking-stepper {
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  padding-bottom: clamp(1.25rem, 2vw, 1.75rem);
+  border-bottom: 1px solid var(--rule);
+}
+
+.booking-stepper ol {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.booking-stepper li {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* Langkah terakhir seukuran isinya, jadi garis stepper membentang sampai tepi kanan. */
+.booking-stepper li:last-child {
+  flex: 0 0 auto;
+}
+
+/* Garis penghubung ke langkah berikutnya, dari tengah lingkaran ini ke tengah lingkaran berikutnya. */
+.booking-stepper li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  left: calc(2rem + 0.75rem);
+  right: 0.75rem;
+  height: 1px;
+  background: var(--rule);
+}
+
+.booking-stepper li.is-done:not(:last-child)::after {
+  background: var(--ink);
+}
+
+.booking-stepper button,
+.booking-stepper__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+
+.booking-stepper button {
+  cursor: pointer;
+}
+
+.booking-stepper__marker {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+
+.booking-stepper__label {
+  color: var(--muted);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.booking-stepper .is-done .booking-stepper__marker {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.booking-stepper .is-done .booking-stepper__label {
+  color: var(--ink);
+}
+
+.booking-stepper .is-done button:hover .booking-stepper__label {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.booking-stepper .is-current .booking-stepper__marker {
+  border: 2px solid var(--brand);
+  color: var(--brand);
+}
+
+.booking-stepper .is-current .booking-stepper__label {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.booking-stepper button:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 4px;
+}
+
+/*
+ * Grid 12 kolom selebar konten: kolom kiri 8 (langkah, judul, pilihan),
+ * kolom kanan 4 (ringkasan). Tepi atas keduanya sejajar di baris breadcrumb.
+ */
+.booking-layout {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: start;
+  column-gap: var(--grid-gap);
+}
+
+.booking-step-header {
+  grid-column: 1 / span 8;
+  grid-row: 1;
+}
+
+.booking-main {
+  grid-column: 1 / span 8;
+  grid-row: 2;
+  min-width: 0;
+}
+
+.booking-form {
+  min-width: 0;
+}
+
+.booking-step-panel {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.booking-step-panel__count {
+  margin: 0 0 0.75rem;
+  color: var(--brand);
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.booking-step-panel__subtitle {
+  margin: 0 0 clamp(1.25rem, 2vw, 1.75rem);
+  color: var(--muted);
+  font-size: var(--text-body);
+}
+
+.booking-step-header h2 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 4.2vw, 3.75rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.booking-step-panel__hint {
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
+
+/* Kartu pilihan: seluruh kartu bisa diklik, radio bawaan tetap dipakai untuk aksesibilitas. */
+.booking-card-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.booking-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.25rem 1rem;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.booking-card:hover {
+  border-color: var(--ink);
+}
+
+.booking-card input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.booking-card:has(input:checked) {
+  border-color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.booking-card:has(input:focus-visible) {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+
+.booking-card__body {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.booking-card__body strong {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.booking-card__body span {
+  color: var(--muted);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+}
+
+/* Kartu layanan: gambar · nama & deskripsi · harga · centang. */
+.booking-card--service {
+  grid-template-columns: 5.5rem minmax(0, 1fr) auto auto;
+  gap: 0.25rem 1.25rem;
+  padding: 0.75rem 1.25rem 0.75rem 0.75rem;
+}
+
+.booking-card__thumb {
+  display: block;
+  width: 5.5rem;
+  aspect-ratio: 1;
+  background: var(--surface);
+  object-fit: cover;
+}
+
+.booking-card__price {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.booking-card--person {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.booking-card__avatar {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--surface);
+  object-fit: cover;
+}
+
+.booking-card__avatar--any {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.booking-card__check {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  color: transparent;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+
+.booking-card:has(input:checked) .booking-card__check {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Tanggal: deretan horizontal yang bisa digeser. */
+.booking-field__label {
+  margin: 1.5rem 0 0.75rem;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.booking-field__label:first-child,
+legend + .booking-field__label {
+  margin-top: 0;
+}
+
+.booking-date-strip {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0 -0.25rem;
+  padding: 0.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+}
+
+.booking-date {
+  position: relative;
+  flex: 0 0 4.25rem;
+  scroll-snap-align: start;
+}
+
+.booking-date input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.booking-date span {
+  display: grid;
+  justify-items: center;
+  gap: 0.15rem;
+  padding: 0.7rem 0.25rem;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.booking-date small {
+  color: var(--muted);
+  font-size: var(--text-caption);
+}
+
+.booking-date strong {
+  font-size: var(--text-lg);
+  font-variant-numeric: tabular-nums;
+}
+
+.booking-date:hover span {
+  border-color: var(--ink);
+}
+
+.booking-date input:checked + span {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.booking-date input:checked + span small {
+  color: inherit;
+}
+
+.booking-date input:focus-visible + span {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* Waktu: dikelompokkan Pagi, Siang, Sore. */
+.booking-time-group + .booking-time-group {
+  margin-top: 1rem;
+}
+
+.booking-time-group__label {
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.booking-time-slots__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+  gap: 0.5rem;
+}
+
+.booking-time-slot {
+  position: relative;
+}
+
+.booking-time-slot input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.booking-time-slot span {
+  display: block;
+  padding: 0.8rem 0.5rem;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.booking-time-slot:hover span {
+  border-color: var(--ink);
+}
+
+.booking-time-slot input:checked + span {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.booking-time-slot input:focus-visible + span {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* Ringkasan di langkah Tinjau khusus HP; desktop memakai kartu samping. */
+.booking-review-mobile {
+  display: none;
+  margin: 0 0 1.5rem;
+  padding: 0.25rem 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.booking-review-mobile > div {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.booking-review-mobile > div:last-child {
+  border-bottom: 0;
+}
+
+.booking-review-mobile dt {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.booking-review-mobile dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Navigasi langkah di bawah konten: Kembali di kiri, Lanjutkan di kanan. */
+.booking-form__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+/* Kontak. */
+.booking-field {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.booking-field > span {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.booking-field input {
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0 1rem;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+}
+
+.booking-field input:focus-visible {
+  border-color: var(--ink);
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.booking-empty,
+.booking-error {
+  margin: 0.75rem 0 0;
+  font-size: var(--text-sm);
+}
+
+.booking-empty {
+  color: var(--muted);
+}
+
+.booking-error {
+  color: var(--brand);
+}
+
+/* Ringkasan: selalu terlihat. Desktop menempel di kanan; HP jadi bar bawah. */
+.booking-summary-card {
+  grid-column: 9 / span 4;
+  grid-row: 2;
+  position: sticky;
+  top: 1.5rem;
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.booking-summary-card__branch {
+  display: grid;
+  gap: 0.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.booking-summary-card__branch strong {
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.booking-summary-card__branch span {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.booking-summary-card__lines {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1rem 0 0;
+}
+
+.booking-summary-card__lines > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.booking-summary-card__lines dt {
+  display: grid;
+  gap: 0.15rem;
+  font-weight: 600;
+}
+
+.booking-summary-card__lines dt span,
+.booking-summary-card__lines .is-empty dt {
+  color: var(--muted);
+  font-size: var(--text-sm);
+  font-weight: 400;
+}
+
+.booking-summary-card__lines dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.booking-summary-card__footer {
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+
+.booking-summary-card__total {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  font-weight: 600;
+}
+
+.booking-summary-card__total dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 900px) {
+  .booking-step-header,
+  .booking-main,
+  .booking-summary-card {
+    grid-column: 1 / -1;
+  }
+
+  /* HP/tablet: kartu samping disembunyikan; progres ada di stepper, ringkasan ada di langkah Tinjau. */
+  .booking-summary-card {
+    display: none;
+  }
+
+  .booking-review-mobile {
+    display: block;
+  }
+
+  /* Tombol Kembali/Lanjutkan menempel di bawah layar supaya selalu terjangkau jempol. */
+  .booking-form__nav {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    margin-inline: calc(var(--page-gutter) * -1);
+    padding: 0.9rem var(--page-gutter);
+    background: var(--paper-2);
+    box-shadow: 0 -8px 24px rgb(17 17 17 / 0.08);
+  }
+}
+
+@media (max-width: 767px) {
+  /*
+   * HP: stepper cukup lingkaran dengan garis yang sama panjang. Semua langkah sama lebar;
+   * nama langkah sudah tertulis di "Langkah X dari 5" dan judul tepat di bawahnya.
+   */
+  .booking-stepper__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* HP: harga pindah ke bawah nama supaya deskripsi tidak terjepit. */
+  .booking-card--service {
+    grid-template-columns: 4.5rem minmax(0, 1fr) auto;
+    grid-template-areas: "thumb body check" "thumb price check";
+    column-gap: 0.9rem;
+  }
+
+  .booking-card--service .booking-card__thumb {
+    grid-area: thumb;
+    width: 4.5rem;
+    align-self: start;
+  }
+
+  .booking-card--service .booking-card__body {
+    grid-area: body;
+  }
+
+  .booking-card--service .booking-card__price {
+    grid-area: price;
+  }
+
+  .booking-card--service .booking-card__check {
+    grid-area: check;
+  }
+
+}
+
+/* ─── Layar akhir: pola konfirmasi umum (kolom tengah, kartu rincian, aksi kalender) ─── */
+.booking-confirmation {
+  display: grid;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 36rem;
+  margin: clamp(1.5rem, 5vw, 4rem) auto 0;
+}
+
+.booking-confirmation__head {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.booking-confirmation__icon {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.booking-confirmation__head h2 {
+  margin: 0.25rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.booking-confirmation__head p {
+  max-width: 28rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--text-body);
+  line-height: 1.55;
+}
+
+.booking-receipt {
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.booking-receipt__service {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.booking-receipt__thumb {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  background: var(--surface);
+  object-fit: cover;
+}
+
+.booking-receipt__service div {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.booking-receipt__service strong {
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.booking-receipt__service div span {
+  color: var(--muted);
+  font-size: var(--text-caption);
+}
+
+.booking-receipt__status {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--brand);
+  border-radius: 999px;
+  color: var(--brand);
+  font-size: var(--text-label);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.booking-receipt__rows {
+  display: grid;
+  gap: 1.1rem;
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+}
+
+.booking-receipt__rows > div {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 1rem;
+}
+
+.booking-receipt__rows dt {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: start;
+  color: var(--muted);
+  font-size: var(--text-caption);
+}
+
+.booking-receipt__rows dd {
+  display: grid;
+  gap: 0.15rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.booking-receipt__rows dd span {
+  color: var(--muted);
+  font-size: var(--text-caption);
+  font-weight: 400;
+}
+
+.booking-receipt__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0;
+  padding: 1.1rem 1.5rem;
+  border-top: 1px solid var(--rule);
+  background: var(--paper-2);
+}
+
+.booking-receipt__total dt {
+  font-weight: 600;
+}
+
+.booking-receipt__total dd {
+  margin: 0;
+  font-size: var(--text-item);
+  font-weight: 600;
+}
+
+.booking-confirmation__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.booking-confirmation__note {
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  font-size: var(--text-caption);
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .booking-confirmation__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-receipt__service {
+    grid-template-columns: auto 1fr;
+    padding: 1rem;
+  }
+
+  .booking-receipt__status {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .booking-receipt__rows,
+  .booking-receipt__total {
+    padding-inline: 1rem;
+  }
+
+  .booking-receipt__rows > div {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+}

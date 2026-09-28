@@ -13,8 +13,7 @@ test("promo stays minimal: one title, one photo, a starting price, one block CTA
   assert.doesNotMatch(promo, /promo-specs|promo-steps/);
   const lowest = Math.min(...services.map(({ price }) => price)).toLocaleString("id-ID");
   assert.match(promo, new RegExp(`Rp\\s?${lowest.replace(".", "\\.")}`));
-  assert.match(promo, /class="[^"]*\bbutton--primary\b[^"]*\bpromo-swiss__cta\b[^"]*prototype-link--inert[^"]*"/);
-  assert.doesNotMatch(promo, /href="\/booking\//);
+  assert.match(promo, /<a(?=[^>]*href="\/booking\/")(?=[^>]*\bbutton--primary\b)(?=[^>]*\bpromo-swiss__cta\b)[^>]*>/, "promo CTA opens the booking flow");
 });
 
 test("promo shares the footer background", () => {

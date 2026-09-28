@@ -23,7 +23,7 @@ function readBuiltPage(path) {
   return readFileSync(file, "utf8");
 }
 
-test("live entry points stay on the homepage, except working email and phone links", () => {
+test("live entry points stay on the homepage and booking, plus working email and phone links", () => {
   for (const path of routeFiles) {
     const html = readBuiltPage(path);
     const anchors = [...html.matchAll(/<a\b[^>]*>/g)].map(([anchor]) => anchor);
@@ -31,8 +31,8 @@ test("live entry points stay on the homepage, except working email and phone lin
     for (const anchor of anchors) {
       const href = anchor.match(/\bhref="([^"]*)"/)?.[1] ?? "";
       assert.ok(
-        href === "/" || href.startsWith("/#") || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:"),
-        `${path} has an active link outside the homepage/contact: ${anchor}`,
+        href === "/" || href.startsWith("/#") || href.startsWith("#") || href === "/booking/" || href.startsWith("/booking/?") || href.startsWith("mailto:") || href.startsWith("tel:"),
+        `${path} has an active link outside the homepage/booking/contact: ${anchor}`,
       );
     }
 

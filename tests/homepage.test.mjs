@@ -25,7 +25,7 @@ test("homepage presents the editorial identity, navigation, and no prototype wor
   assert.match(html, /aria-label="Navigasi utama"/);
   assert.match(pageText, /Rendezvous/);
   assert.doesNotMatch(pageText, /prototype|\bdemo\b|contoh|simulasi|sintetis/i);
-  assert.match(html, /class="button button--primary[^"]* prototype-link--inert"/);
+  assert.match(html, /<a class="button button--primary button--compact" href="\/booking\/"/, "nav booking CTA is clickable");
 });
 
 test("footer keeps contact and remaining navigation while omitting the removed lower band and services group", () => {
@@ -52,15 +52,16 @@ test("homepage renders all CMS-mapped sections in the approved order", () => {
   for (const id of ["services", "branches", "barbers", "lookbook", "articles", "faq"]) {
     assert.ok(html.includes(`href="#${id}"`), `missing in-page link to #${id}`);
   }
-  for (const path of ["/services/", "/branches/", "/barbers/", "/journal/", "/booking/"]) {
+  for (const path of ["/services/", "/branches/", "/barbers/", "/journal/"]) {
     assert.ok(!html.includes(`href="${path}`), `homepage should not link to ${path}`);
   }
+  assert.ok(html.includes('href="/booking/"'), "booking stays reachable from the homepage");
 });
 
 test("hero introduces the editorial brand and guides visitors to booking", () => {
   assert.match(pageText, /A good cut\. A better day\./i);
   assert.match(pageText, /Barbershop untuk potongan yang dibuat sesuai kamu, bukan tren\./);
-  assert.match(html, /class="button button--primary campaign-hero__cta prototype-link--inert"[^>]*>\s*<span>Booking sekarang/);
+  assert.match(html, /<a(?=[^>]*href="\/booking\/")(?=[^>]*campaign-hero__cta)[^>]*>\s*<span>Booking sekarang/);
 });
 
 test("homepage shows every bookable service with its service type as the headline", () => {
