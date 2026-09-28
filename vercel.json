@@ -2,5 +2,37 @@
   "framework": "astro",
   "buildCommand": "astro build",
   "outputDirectory": "dist",
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "rewrites": [
+    {
+      "source": "/dashboard",
+      "destination": "https://rendezvous-cms.vercel.app/dashboard"
+    },
+    {
+      "source": "/dashboard/:path*",
+      "destination": "https://rendezvous-cms.vercel.app/dashboard/:path*"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/dasboard",
+      "destination": "/dashboard",
+      "permanent": true
+    },
+    {
+      "source": "/dasboard/:path*",
+      "destination": "/dashboard/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/dasborad",
+      "destination": "/dashboard",
+      "permanent": true
+    },
+    {
+      "source": "/dasborad/:path*",
+      "destination": "/dashboard/:path*",
+      "permanent": true
+    }
+  ]
 }
