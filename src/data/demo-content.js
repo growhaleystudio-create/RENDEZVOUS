@@ -164,12 +164,12 @@ export const branches = [
 }));
 
 const barberPhotos = {
-  issa: { alt: "Potret Issa dengan rambut gelap bergelombang dan kemeja kerja gelap." },
-  stas: { alt: "Potret Stas dengan rambut pendek, janggut tipis, dan apron gelap." },
-  cesar: { alt: "Potret Cesar dengan rambut ikal, kacamata, dan janggut pendek." },
-  hamo: { alt: "Potret Hamo dengan rambut bergelombang medium dan kemeja gelap." },
-  adit: { alt: "Potret Adit dengan rambut pendek menyamping dan kaus gelap." },
-  raka: { alt: "Potret Raka dengan kepala plontos, janggut penuh, dan kemeja gelap." },
+  issa: { alt: "Potret barber Indonesia berambut bergelombang dengan apron gelap." },
+  stas: { alt: "Potret barber Indonesia berambut pendek dan mengenakan apron kerja." },
+  cesar: { alt: "Potret barber Indonesia berambut panjang diikat dan berkumis." },
+  hamo: { alt: "Potret barber Indonesia berambut medium bergelombang dan berkumis." },
+  adit: { alt: "Potret barber Indonesia berambut pendek dengan kumis dan apron." },
+  raka: { alt: "Potret barber Indonesia berjanggut lebat dengan rambut pendek." },
 };
 
 export const barbers = [
@@ -193,12 +193,12 @@ export const barbers = [
 }));
 
 export const lookbookItems = [
-  ["modern-crop", "Modern Crop", "signature-cut", "look-short-crop.webp", "Potret rambut pendek bertekstur dengan sisi rapi."],
-  ["classic-side-part", "Classic Side Part", "signature-cut", "hero-finished-cut.webp", "Profil potongan rambut dengan belahan samping tegas dan fade halus."],
-  ["textured-quiff", "Textured Quiff", "signature-cut", "look-textured-quiff-closeup.webp", "Close-up rambut dengan bagian depan ditata tinggi dan sisi yang dipotong pendek."],
-  ["clean-fade", "Clean Fade", "skin-fade", "skin-fade-detail.webp", "Tampak belakang potongan fade pendek dengan gradasi bersih."],
-  ["slick-back", "Slick Back", "signature-cut", "look-slick-back.webp", "Profil rambut panjang sedang yang disisir rapi ke belakang."],
-  ["natural-texture", "Natural Texture", "signature-cut", "look-natural-texture.webp", "Potret rambut ikal alami yang dibiarkan bervolume."],
+  ["modern-crop", "Modern Crop", "signature-cut", "look-short-crop.webp", "Pria Indonesia dengan potongan crop pendek bertekstur dan sisi rapi."],
+  ["classic-side-part", "Classic Side Part", "signature-cut", "hero-finished-cut.webp", "Pria Indonesia dengan belahan samping tegas dan fade halus."],
+  ["textured-quiff", "Textured Quiff", "signature-cut", "look-textured-quiff-closeup.webp", "Close-up pria Indonesia dengan quiff bertekstur dan sisi pendek."],
+  ["clean-fade", "Clean Fade", "skin-fade", "skin-fade-detail.webp", "Detail potongan fade pendek dengan gradasi bersih pada rambut pria Indonesia."],
+  ["slick-back", "Slick Back", "signature-cut", "look-slick-back.webp", "Profil pria Indonesia dengan rambut medium disisir rapi ke belakang."],
+  ["natural-texture", "Natural Texture", "signature-cut", "look-natural-texture.webp", "Pria Indonesia dengan rambut ikal alami yang dibiarkan bervolume."],
 ].map(([id, title, serviceId, imageName, alt]) => ({
   id,
   title,
@@ -235,7 +235,7 @@ export const articles = [
     excerpt: "Ceritakan rutinitas dan hasil yang kamu inginkan sebelum potong rambut.",
     body: "Saat konsultasi, sampaikan kebiasaan styling, panjang yang nyaman dirawat, dan bagian yang ingin ditonjolkan. Informasi itu membantu barber menyesuaikan potongan dengan kebutuhanmu.",
     image: "/images/photography/barber-result-review.webp",
-    imageAlt: "Barber menunjukkan hasil potongan kepada klien dengan cermin tangan.",
+    imageAlt: "Barber Indonesia menunjukkan hasil potongan kepada klien dengan cermin tangan.",
   },
   {
     id: "article-ritual",
@@ -245,7 +245,7 @@ export const articles = [
     excerpt: "Kebiasaan sederhana membantu rambut tetap rapi di antara kunjungan.",
     body: "Gunakan produk secukupnya sesuai tekstur rambut dan kebutuhan styling. Jika ragu, tanyakan kepada barber produk yang cocok untuk rutinitasmu.",
     image: "/images/photography/grooming-mirror.webp",
-    imageAlt: "Pria menyisir janggutnya di depan cermin sebagai bagian dari rutinitas grooming.",
+    imageAlt: "Pria Indonesia merapikan janggut di depan cermin barbershop.",
   },
   {
     id: "article-texture",
@@ -255,7 +255,7 @@ export const articles = [
     excerpt: "Tekstur rambut ikut menentukan bentuk potongan dan cara menatanya.",
     body: "Perhatikan bagaimana rambut jatuh saat kering dan berapa banyak waktu yang ingin kamu luangkan untuk styling. Sampaikan keduanya saat konsultasi agar rekomendasi potongan lebih sesuai.",
     image: "/images/photography/hair-texture-portrait.webp",
-    imageAlt: "Potret pria dengan rambut ikal tebal dan tekstur alami.",
+    imageAlt: "Potret pria Indonesia dengan rambut ikal tebal dan tekstur alami.",
   },
 ];
 

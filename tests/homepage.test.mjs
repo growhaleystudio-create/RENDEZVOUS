@@ -84,7 +84,7 @@ test("booking invitation uses a full-width centered landscape photo above the CT
   const mediaRule = promoStyles.match(/\.promo-swiss__media\s*\{[^}]*\}/)?.[0] ?? "";
   const bodyRule = promoStyles.match(/\.promo-swiss__body\s*\{[^}]*\}/)?.[0] ?? "";
   assert.match(promo, /src="\/images\/photography\/barbers-chair-team\.jpg"/);
-  assert.match(promo, /alt="Kursi barber menghadap ke depan dengan enam barber berdiri di belakangnya\."/);
+  assert.match(promo, /alt="Enam barber Indonesia berdiri di belakang kursi barber yang menghadap ke depan\."/);
   assert.match(promo, /width="1536" height="1024"/);
   assert.match(promo, /<\/div><div class="promo-swiss__media"><img class="promo-swiss__photo"/);
   assert.match(promo, /<div class="editorial-shell">\s*<div class="promo-swiss__body"/);
