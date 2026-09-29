@@ -61,7 +61,7 @@ test("homepage renders all CMS-mapped sections in the approved order", () => {
 test("hero introduces the editorial brand and guides visitors to booking", () => {
   assert.match(pageText, /A good cut\. A better day\./i);
   assert.match(pageText, /Barbershop untuk potongan yang dibuat sesuai kamu, bukan tren\./);
-  assert.match(html, /<a(?=[^>]*href="\/booking\/")(?=[^>]*campaign-hero__cta)[^>]*>\s*<span>Booking sekarang/);
+  assert.doesNotMatch(html.match(/<section class="campaign-hero"[\s\S]*?<\/section>/)?.[0] ?? "", /<a\s/, "the hero carries no CTA; booking lives in the nav and promo");
 });
 
 test("homepage shows every bookable service with its service type as the headline", () => {

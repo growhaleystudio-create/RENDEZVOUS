@@ -19,10 +19,9 @@ test('section reveals never flash previously visible content dark or closed', ()
 test('inert prototype entries keep their normal visuals without navigation or disabled semantics', () => {
   const html = read('../dist/index.html');
   const styles = read('../src/styles/type.css');
-  const hero = html.match(/<div class="campaign-hero__intro">[\s\S]*?<\/div>/)?.[0] ?? '';
-  assert.match(hero, /class="button button--primary campaign-hero__cta[^"]*"/);
-  assert.match(hero, /<svg\b/);
-  assert.match(hero, /href="\/booking\/"/, 'the hero CTA opens the booking flow');
+  const cta = html.match(/<a[^>]*class="button button--primary promo-swiss__cta"[\s\S]*?<\/a>/)?.[0] ?? '';
+  assert.match(cta, /<svg\b/);
+  assert.match(cta, /href="\/booking\/"/, 'the promo CTA opens the booking flow');
   assert.doesNotMatch(html, /prototype-link--disabled|aria-disabled="true"/);
   assert.doesNotMatch(styles, /\.prototype-link--disabled/);
 });

@@ -23,7 +23,7 @@
 .campaign-hero h1 { margin: 0; font-family: var(--font-campaign); font-weight: 400; font-size: clamp(5rem, 13.8vw, 15.5rem); line-height: 1.01; letter-spacing: -0.04em; text-transform: uppercase; }
 .campaign-hero h1 span { display: block; white-space: nowrap; }
 .campaign-hero__intro { padding-block: 1rem; }
-.campaign-hero__intro p { margin: 0 0 1.75rem; max-width: 28ch; }
+.campaign-hero__intro p { margin: 0; max-width: 28ch; }
 
 .campaign-hero__diptych { display: grid; grid-template-columns: minmax(0, 69fr) minmax(0, 31fr); gap: 4px; max-width: var(--content-width); margin-inline: auto; }
 .campaign-hero__diptych figure { margin: 0; min-width: 0; height: clamp(20rem, 46.5vw, 52rem); overflow: hidden; }
@@ -122,7 +122,6 @@
 @media (max-width: 1100px) {
   .site-brand > span { font-size: var(--text-md); letter-spacing: 0.3em; }
   .site-header .desktop-nav { gap: 1.25rem; font-size: var(--text-md); }
-  .campaign-hero__intro p { margin-bottom: 1.15rem; }
 
   .campaign-philosophy__copy { padding-right: 0; }
   .campaign-services__header { grid-template-columns: minmax(8rem, 0.55fr) minmax(0, 2fr); }
@@ -145,7 +144,7 @@
   .campaign-hero { padding-top: 1.6rem; }
   .campaign-hero__heading { grid-template-columns: 1fr; gap: 1.25rem; padding-bottom: 1.75rem; }
   .campaign-hero h1 { font-size: clamp(3rem, 17.3vw, 8rem); line-height: 1.05; letter-spacing: -0.04em; }
-  .campaign-hero__intro { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1rem; padding: 0; }
+  .campaign-hero__intro { padding: 0; }
   .campaign-hero__intro .campaign-hero__lead { margin: 0; }
   .campaign-hero__intro > p:not(.campaign-hero__lead) { grid-column: 1 / -1; grid-row: 2; margin: 0; max-width: 46ch; font-size: var(--text-sm); }
 
@@ -209,7 +208,6 @@
   .site-brand > span { font-size: var(--text-xs); }
   .site-header__inner { gap: 0.4rem; }
   .site-header__booking-extra { display: none; }
-  .campaign-hero__intro { grid-template-columns: 1fr; }
 }
 
 .campaign-home .barbers-section { background: var(--paper); }

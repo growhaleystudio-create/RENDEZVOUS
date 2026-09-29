@@ -1,19 +1,8 @@
----
-import EditorialButton from "./EditorialButton.astro";
-
-interface Props {
-  bookingUrl: string;
-}
-
-const { bookingUrl } = Astro.props;
----
-
 <section class="campaign-hero" aria-labelledby="hero-title" id="top">
   <div class="editorial-shell campaign-hero__heading">
     <h1 id="hero-title"><span class="motion-line"><span>A good cut.</span></span><span class="motion-line"><span>A better day.</span></span></h1>
     <div class="campaign-hero__intro">
       <p class="campaign-hero__lead">Barbershop untuk potongan yang dibuat sesuai kamu, bukan tren.</p>
-      <EditorialButton href={bookingUrl} label="Booking sekarang" class="campaign-hero__cta" />
     </div>
   </div>
   <div class="campaign-hero__diptych">

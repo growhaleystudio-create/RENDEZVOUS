@@ -17,9 +17,6 @@
   html[data-hero-intro="playing"] .campaign-hero__lead {
     animation: editorial-copy-in var(--dur-reveal) var(--ease-out) calc(var(--stagger) * 6) both;
   }
-  html[data-hero-intro="playing"] .campaign-hero__cta {
-    animation: editorial-cta-in var(--dur-reveal) var(--ease-out) calc(var(--stagger) * 8) both;
-  }
 
   /*
    * Parallax: foto bergeser pelan mengikuti scroll. Skala dasar berlaku sejak paint pertama
@@ -49,11 +46,6 @@
 }
 
 @keyframes editorial-copy-in {
-  from { transform: translateY(var(--reveal-distance)); }
-  to { transform: translateY(0); }
-}
-
-@keyframes editorial-cta-in {
   from { transform: translateY(var(--reveal-distance)); }
   to { transform: translateY(0); }
 }

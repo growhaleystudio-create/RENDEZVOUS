@@ -12,10 +12,6 @@ import FaqSection from "../components/sections/FaqSection.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { testimonials } from "../data/demo-content.js";
 import "../styles/editorial-motion.css";
-
-const bookingUrl =
-  import.meta.env.PUBLIC_BOOKING_URL ??
-  "/booking/";
 ---
 
 <SiteLayout>
@@ -30,7 +26,7 @@ const bookingUrl =
 		}
 	</script>
 	<main class="campaign-home">
-		<EditorialHero bookingUrl={bookingUrl} />
+		<EditorialHero />
 		<PhilosophySection />
 		<ServicesSection />
 		<BranchesSection />
